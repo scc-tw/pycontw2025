@@ -23,9 +23,9 @@
     
     <footer class="app-footer">
       <div class="container mx-auto px-4 py-6 text-center text-sm text-gray-600">
-        <p>© 2025 PyCon Taiwan. Built with Vue 3 + Vite + TypeScript</p>
+        <p>© 2025 PyCon Taiwan. Built with Vue 3 + Vite + TypeScript by Claude & SCC</p>
         <p class="mt-2">
-          <a href="https://github.com/pycontw/pycontw2025" target="_blank" class="footer-link">
+          <a href="https://github.com/scc-tw/pycontw2025" target="_blank" class="footer-link">
             GitHub
           </a>
           <span class="mx-2">•</span>

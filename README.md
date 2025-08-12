@@ -1,31 +1,70 @@
 # PyCon TW 2025 Resource Assets Page
 
-A Vue 3 + Vite + TypeScript application for hosting and presenting benchmark resources, source code, and data visualizations for PyCon Taiwan 2025 talk.
+A Vue 3 + Vite + TypeScript application for hosting and presenting benchmark resources, source code, and data visualizations for PyCon Taiwan 2025 conference talk.
 
 ## 🌐 Live Demo
 
 Visit: [https://pycontw2025.scc.tw/](https://pycontw2025.scc.tw/)
 
-## 🚀 Features
+## 🚀 Key Features
 
-- **📁 Nested Folder Navigation**: Full support for nested directory structures
-- **💻 Source Code Browser**: View Python scripts, YAML configs, and more with syntax highlighting
-- **📊 Data Visualization**: Display CSV tables, JSON data, SVG charts, and images
-- **⬇️ Direct Downloads**: Download any file directly from the browser
-- **📋 Copy to Clipboard**: Quick copy functionality for code and data
-- **🔍 Zoom Controls**: For SVG visualizations
-- **📱 Responsive Design**: Mobile-friendly interface
-- **🎨 PyCon TW Branding**: Custom theme colors
+### File Management
+- **📁 Nested Folder Navigation**: Interactive file tree with expand/collapse functionality
+- **🔄 Reactive State Management**: Real-time folder expansion and file selection
+- **📍 Breadcrumb Navigation**: Clear path display with home navigation
+
+### Code Display
+- **💻 Source Code Browser**: Syntax highlighting for 15+ programming languages
+- **🐍 Python Support**: Full support for .py, .pyx, .pyi files
+- **🦀 Rust Support**: Complete Rust file viewing capabilities
+- **🔧 C/C++ Support**: View C, C++, header files with proper highlighting
+- **📜 Script Support**: Shell, Bash, Zsh script viewing
+
+### Data Visualization
+- **📊 Interactive Tables**: CSV/TSV data rendered as sortable tables
+- **📈 SVG Charts**: Inline rendering with zoom controls
+- **🖼️ Image Display**: Support for PNG, JPG, GIF, WebP formats
+- **📄 PDF Viewer**: Embedded PDF viewing with download option
+- **🔢 JSON Pretty Print**: Formatted JSON with syntax highlighting
+
+### User Experience
+- **📋 Copy to Clipboard**: One-click code copying
+- **⬇️ Direct Downloads**: Download any file type
+- **📱 Responsive Design**: Mobile-optimized interface
+- **♿ Accessibility**: ARIA labels and keyboard navigation
+- **🎨 PyCon TW Theme**: Custom branding and colors
 
 ## 🛠️ Technology Stack
 
-- **Vue 3.5** - Progressive JavaScript Framework
-- **TypeScript 5.5** - Type-safe development
-- **Vite 5.4** - Fast build tool
-- **Tailwind CSS 3.4** - Utility-first CSS framework
-- **Vue Router 4.4** - SPA routing
-- **Shiki** - Syntax highlighting
-- **Markdown-it** - Markdown rendering
+- **Vue 3.5** - Composition API with TypeScript
+- **TypeScript 5.7** - Strict type checking (no unnecessary `any` types)
+- **Vite 6.0** - Lightning-fast HMR and build
+- **Tailwind CSS 3.4** - Utility-first styling
+- **Vue Router 4.5** - Hash mode for GitHub Pages
+- **Shiki 1.24** - Beautiful syntax highlighting
+- **Markdown-it 14.1** - Markdown rendering
+- **VueUse 11.3** - Composition utilities
+
+## 🚀 Quick Start
+
+```bash
+# Clone and setup
+git clone https://github.com/scc-tw/pycontw2025.git
+cd pycontw2025
+npm install
+
+# Add your files
+cp -r your-source-files/* public/resources/source/
+cp -r your-data-files/* public/resources/data/
+
+# Start development
+npm run dev
+
+# Build and deploy
+npm run build
+```
+
+Open [http://localhost:5173](http://localhost:5173) to see your files!
 
 ## 📦 Installation
 
@@ -51,23 +90,53 @@ npm run preview
 
 ```
 pycontw2025/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml           # GitHub Actions deployment
 ├── src/
-│   ├── components/       # Vue components
-│   │   ├── FolderTree.vue       # Recursive folder navigation
-│   │   ├── CodeViewer.vue       # Source code display
-│   │   ├── DataVisualizer.vue   # Data visualization
-│   │   └── ResourceCard.vue     # Homepage cards
-│   ├── views/            # Page components
-│   ├── types/            # TypeScript definitions
-│   ├── composables/      # Vue composables
-│   └── utils/            # Utility functions
+│   ├── components/              # Reusable Vue components
+│   │   ├── CodeViewer.vue       # Syntax-highlighted code display
+│   │   ├── DataVisualizer.vue   # Multi-format data visualization
+│   │   ├── FolderTree.vue       # Recursive file tree navigation
+│   │   ├── LoadingState.vue     # Loading indicators
+│   │   ├── ResourceCard.vue     # Homepage feature cards
+│   │   └── ErrorBoundary.vue    # Error handling wrapper
+│   ├── services/                # Service layer (DI pattern)
+│   │   ├── ServiceContainer.ts  # Dependency injection container
+│   │   ├── FileService.ts       # File operations & caching
+│   │   ├── NavigationService.ts # Reactive navigation state
+│   │   ├── ConfigService.ts     # App configuration
+│   │   ├── ErrorService.ts      # Error handling
+│   │   └── PerformanceService.ts # Performance monitoring
+│   ├── views/                   # Page components
+│   │   ├── HomePage.vue         # Landing page
+│   │   ├── SourceCode.vue       # Source code browser
+│   │   └── BenchmarkData.vue    # Data visualization page
+│   ├── composables/             # Vue composition functions
+│   │   ├── useServices.ts       # Service injection hook
+│   │   └── useAccessibility.ts  # Accessibility utilities
+│   ├── types/                   # TypeScript definitions
+│   │   ├── index.ts             # Main type exports
+│   │   └── resources.ts         # Resource type definitions
+│   ├── utils/                   # Utility functions
+│   │   └── fileHelpers.ts       # File type detection & icons
+│   ├── router/                  # Vue Router configuration
+│   │   └── index.ts             # Route definitions
+│   └── main.ts                  # Application entry point
+├── scripts/
+│   └── generate-manifest.js     # Auto-generate file manifest
 ├── public/
-│   ├── resources/        # Your actual files
-│   │   ├── source/       # Source code files
-│   │   └── data/         # Benchmark data
-│   ├── manifest.json     # File listing
-│   └── CNAME            # Custom domain
-└── dist/                # Production build
+│   ├── resources/               # Your actual files (add here!)
+│   │   ├── source/              # Source code files
+│   │   │   └── benchmarks/      # Example structure
+│   │   └── data/                # Benchmark data files
+│   │       └── results/         # Example structure
+│   ├── manifest.json            # Auto-generated file listing
+│   └── CNAME                    # Custom domain config
+├── tests/                       # Test files
+│   ├── services/                # Service tests
+│   └── setup.ts                 # Test configuration
+└── dist/                        # Production build output
 ```
 
 ## 📝 Adding Your Resources
@@ -200,12 +269,55 @@ const iconMap: Record<string, string> = {
 
 ## 📝 Scripts
 
-- `npm run dev` - Start development server
-- `npm run generate-manifest` - Generate file manifest from public/resources/
-- `npm run build` - Generate manifest + build for production
-- `npm run preview` - Preview production build
-- `npm run type-check` - Run TypeScript checks
-- `npm run lint` - Run ESLint
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server with hot reload at localhost:5173 |
+| `npm run build` | Auto-generate manifest + production build |
+| `npm run preview` | Preview production build locally |
+| `npm run generate-manifest` | Scan public/resources/ and create manifest.json |
+| `npm run type-check` | Run TypeScript type checking |
+| `npm run lint` | Run ESLint and auto-fix issues |
+| `npm run test` | Run unit tests with Vitest |
+| `npm run test:ui` | Run tests with interactive UI |
+| `npm run test:coverage` | Generate test coverage report |
+
+## 🏗️ Architecture
+
+### Service Layer Pattern
+The application uses a **Dependency Injection (DI) pattern** with a service layer for clean separation of concerns:
+
+- **ServiceContainer**: Central DI container managing all service instances
+- **FileService**: Handles file operations, manifest loading, and caching
+- **NavigationService**: Manages reactive navigation state and folder expansion
+- **ConfigService**: Application configuration management
+- **ErrorService**: Centralized error handling and reporting
+- **PerformanceService**: Performance monitoring and metrics
+
+### State Management
+- **Reactive State**: Uses Vue 3's `reactive()` for real-time UI updates
+- **Navigation State**: Centralized in NavigationService for consistent behavior
+- **File Tree State**: Manages expanded folders and selected files
+
+### TypeScript Best Practices
+- **Strict Type Checking**: No unnecessary `any` types
+- **Interface-First Design**: All services implement interfaces
+- **Generic Types**: Used for flexible, type-safe code
+- **Type Guards**: Proper unknown type handling
+
+## 🧪 Testing
+
+```bash
+# Run unit tests
+npm run test
+
+# Run tests with UI
+npm run test:ui
+
+# Generate coverage report
+npm run test:coverage
+```
+
+The project includes unit tests for critical services and components using Vitest.
 
 ## 🤝 Contributing
 
@@ -214,6 +326,30 @@ const iconMap: Record<string, string> = {
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**Folder expansion not working**
+- Ensure NavigationService is properly initialized
+- Check browser console for navigation errors
+- Verify manifest.json is properly generated
+
+**Files not displaying**
+- Run `npm run generate-manifest` to regenerate file listing
+- Check that files are in `/public/resources/` directory
+- Verify file permissions are correct
+
+**GitHub Pages 404 errors**
+- Ensure hash routing is used (not history mode)
+- Check CNAME file is present in public directory
+- Verify GitHub Pages is enabled in repository settings
+
+**Build failures**
+- Clear node_modules and reinstall: `rm -rf node_modules && npm install`
+- Check Node.js version (requires v18+)
+- Ensure all TypeScript errors are resolved
 
 ## 📄 License
 
