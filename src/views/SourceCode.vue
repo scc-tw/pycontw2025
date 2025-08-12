@@ -3,15 +3,16 @@
     <header class="view-header">
       <div class="container mx-auto px-4">
         <nav class="breadcrumb">
-          <router-link
+          <span
             v-for="(crumb, index) in breadcrumbs"
             :key="crumb.path"
-            :to="index === 0 ? '/' : `/source${crumb.path}`"
             class="breadcrumb-item"
+            :class="{ 'cursor-pointer hover:text-pycon-blue': index === 0 }"
+            @click="index === 0 ? $router.push('/') : null"
           >
             {{ crumb.name }}
             <span v-if="index < breadcrumbs.length - 1" class="breadcrumb-separator">/</span>
-          </router-link>
+          </span>
         </nav>
       </div>
     </header>

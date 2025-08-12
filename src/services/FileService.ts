@@ -45,12 +45,16 @@ export class FileService implements IFileService {
       const response = await fetch(`${this.baseUrl}manifest.json`)
       if (response.ok) {
         const manifest = await response.json()
-        // Filter files based on the requested base path
+        // Extract the category from basePath (e.g., 'resources/source' -> 'source')
+        const category = basePath.replace(/^.*resources\//, '').replace(/\/$/, '')
+        
+        // Filter files based on the requested category
         const filteredFiles = (manifest.files || []).filter((file: string) => {
-          const normalizedBase = basePath.replace(/^\/+/, '').replace(/\/+$/, '')
-          return file.startsWith(normalizedBase.replace('resources/', ''))
+          return file.startsWith(category + '/')
         })
-        const tree = this.transformToFileTree(filteredFiles, basePath)
+        
+        // Build tree with corrected paths
+        const tree = this.transformToFileTree(filteredFiles, category)
         this.setCache(cacheKey, tree)
         return tree
       }
@@ -145,16 +149,33 @@ export class FileService implements IFileService {
   /**
    * Transforms flat file list to hierarchical tree structure
    */
-  private transformToFileTree(files: string[], basePath: string): FileNode[] {
+  private transformToFileTree(files: string[], category: string): FileNode[] {
     const root: Map<string, FileNode> = new Map()
     const tree: FileNode[] = []
+    
+    // First, ensure we have a root node for the category itself
+    if (files.length > 0 && category) {
+      const categoryNode: FileNode = {
+        name: category,
+        path: `resources/${category}`,
+        type: 'directory',
+        children: []
+      }
+      tree.push(categoryNode)
+      root.set(`resources/${category}`, categoryNode)
+    }
     
     files.sort() // Ensure consistent ordering
     
     files.forEach(filePath => {
-      const parts = filePath.split('/').filter(Boolean)
-      let currentPath = basePath
-      let parentChildren = tree
+      // Remove the category prefix to get the relative path
+      const relativePath = filePath.startsWith(category + '/') 
+        ? filePath.substring(category.length + 1)
+        : filePath
+      
+      const parts = relativePath.split('/').filter(Boolean)
+      let currentPath = `resources/${category}`
+      let parentChildren = tree[0]?.children || tree
       
       parts.forEach((part, index) => {
         currentPath = `${currentPath}/${part}`

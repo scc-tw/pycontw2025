@@ -1,3 +1,4 @@
+import { reactive } from 'vue'
 import type { FileNode, NavigationState, BreadcrumbItem } from '@/types/resources'
 
 /**
@@ -20,7 +21,7 @@ export class NavigationService implements INavigationService {
   private readonly maxHistorySize = 50
 
   constructor() {
-    this.state = this.initializeState()
+    this.state = reactive(this.initializeState())
   }
 
   /**
@@ -66,7 +67,7 @@ export class NavigationService implements INavigationService {
     if (file.type === 'directory') {
       const pathSegments = file.path.split('/').filter(Boolean)
       this.navigateToPath(pathSegments)
-      this.toggleFolder(file.path)
+      // Don't toggle here - let the toggle event handle it
     }
   }
 
