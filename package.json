@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "generate-manifest": "node scripts/generate-manifest.js",
+    "build": "npm run generate-manifest && vue-tsc && vite build",
     "preview": "vite preview",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --fix",

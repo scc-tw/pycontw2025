@@ -63,15 +63,21 @@ import LoadingState from '@/components/LoadingState.vue'
 
 interface Props {
   file: FileNode | null
+  content?: string
+  loading?: boolean
 }
 
 const props = defineProps<Props>()
 
 const { fileService, performanceService } = useServices()
-const content = ref<string>('')
-const loading = ref(false)
+const localContent = ref<string>('')
+const localLoading = ref(false)
 const error = ref<string | null>(null)
 const copied = ref(false)
+
+// Use provided content or fetch it
+const content = computed(() => props.content || localContent.value)
+const loading = computed(() => props.loading !== undefined ? props.loading : localLoading.value)
 
 const isImage = computed(() => {
   const imageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'webp']
@@ -87,8 +93,13 @@ const imageUrl = computed(() => {
 })
 
 watch(() => props.file, async (newFile) => {
+  // Only fetch content if not provided via props
+  if (props.content !== undefined) {
+    return
+  }
+  
   if (!newFile || newFile.type === 'directory') {
-    content.value = ''
+    localContent.value = ''
     return
   }
   
@@ -96,17 +107,17 @@ watch(() => props.file, async (newFile) => {
     return
   }
   
-  loading.value = true
+  localLoading.value = true
   error.value = null
   
   try {
     await performanceService.measureAsync('fetchFileContent', async () => {
-      content.value = await fileService.fetchFileContent(newFile.path)
+      localContent.value = await fileService.fetchFileContent(newFile.path)
     })
   } catch (e) {
     error.value = e instanceof Error ? e.message : 'Failed to load file'
   } finally {
-    loading.value = false
+    localLoading.value = false
   }
 }, { immediate: true })
 

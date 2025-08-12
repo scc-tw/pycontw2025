@@ -46,7 +46,19 @@
         </aside>
         
         <main class="col-span-12 md:col-span-8 lg:col-span-9">
-          <DataVisualizer :file="navigationState.selectedFile" />
+          <DataVisualizer v-if="navigationState.selectedFile && navigationState.selectedFile.type === 'file'" 
+                          :file="navigationState.selectedFile" 
+                          :content="fileContent"
+                          :fileUrl="fileService.getDownloadUrl(navigationState.selectedFile.path)" />
+          <div v-else-if="navigationState.selectedFile && navigationState.selectedFile.type === 'directory'" 
+               class="bg-white rounded-lg shadow-sm p-8 text-center text-gray-500">
+            <p class="text-4xl mb-2">📁</p>
+            <p class="font-medium">{{ navigationState.selectedFile.name }}</p>
+            <p class="text-sm mt-2">This is a directory. Select a file to view its contents.</p>
+          </div>
+          <div v-else class="bg-white rounded-lg shadow-sm p-8 text-center text-gray-500">
+            <p>Select a file from the tree to view its contents</p>
+          </div>
         </main>
       </div>
     </div>
@@ -66,13 +78,33 @@ const { fileService, navigationService, performanceService } = useServices()
 const fileTree = ref<FileNode[]>([])
 const loading = ref(false)
 const error = ref<string | null>(null)
+const fileContent = ref<string>('')
+const loadingContent = ref(false)
 
 // Reactive navigation state
 const navigationState = computed(() => navigationService.getCurrentState())
 const breadcrumbs = computed(() => navigationService.getBreadcrumbs())
 
-const selectFile = (file: FileNode) => {
+const selectFile = async (file: FileNode) => {
   navigationService.selectFile(file)
+  
+  // Load file content if it's a file
+  if (file.type === 'file') {
+    loadingContent.value = true
+    fileContent.value = ''
+    try {
+      // For data files, we might need different handling
+      const ext = file.extension?.toLowerCase()
+      if (ext && ['json', 'csv', 'tsv', 'txt', 'md', 'yaml', 'yml'].includes(ext)) {
+        fileContent.value = await fileService.fetchFileContent(file.path)
+      }
+    } catch (e) {
+      console.error('Failed to load file content:', e)
+      fileContent.value = ''
+    } finally {
+      loadingContent.value = false
+    }
+  }
 }
 
 const toggleFolder = (path: string) => {

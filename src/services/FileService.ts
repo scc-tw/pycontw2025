@@ -45,7 +45,12 @@ export class FileService implements IFileService {
       const response = await fetch(`${this.baseUrl}manifest.json`)
       if (response.ok) {
         const manifest = await response.json()
-        const tree = this.transformToFileTree(manifest.files || [], basePath)
+        // Filter files based on the requested base path
+        const filteredFiles = (manifest.files || []).filter((file: string) => {
+          const normalizedBase = basePath.replace(/^\/+/, '').replace(/\/+$/, '')
+          return file.startsWith(normalizedBase.replace('resources/', ''))
+        })
+        const tree = this.transformToFileTree(filteredFiles, basePath)
         this.setCache(cacheKey, tree)
         return tree
       }
@@ -70,7 +75,12 @@ export class FileService implements IFileService {
       return cached
     }
 
-    const cleanPath = this.sanitizePath(path)
+    // Ensure path starts with resources/ if it doesn't
+    let cleanPath = this.sanitizePath(path)
+    if (!cleanPath.startsWith('resources/')) {
+      cleanPath = cleanPath.replace(/^.*\/resources\//, 'resources/')
+    }
+    
     const response = await fetch(`${this.baseUrl}${cleanPath}`)
     
     if (!response.ok) {
@@ -183,24 +193,76 @@ export class FileService implements IFileService {
   private detectLanguage(filename: string): string {
     const ext = filename.split('.').pop()?.toLowerCase()
     const languageMap: Record<string, string> = {
+      // Programming Languages
       'py': 'python',
+      'pyx': 'cython',
+      'pyi': 'python',
+      'rs': 'rust',
+      'c': 'c',
+      'h': 'c',
+      'cpp': 'cpp',
+      'cc': 'cpp',
+      'cxx': 'cpp',
+      'hpp': 'cpp',
+      'hxx': 'cpp',
       'ts': 'typescript',
+      'tsx': 'typescriptreact',
       'js': 'javascript',
-      'json': 'json',
-      'yaml': 'yaml',
-      'yml': 'yaml',
-      'md': 'markdown',
+      'jsx': 'javascriptreact',
+      'vue': 'vue',
+      
+      // Shell & Scripts
       'sh': 'shell',
       'bash': 'shell',
-      'svg': 'svg',
-      'csv': 'csv',
-      'pdf': 'pdf',
+      'zsh': 'shell',
+      'fish': 'shell',
+      
+      // Build & Config
+      'makefile': 'makefile',
+      'mk': 'makefile',
+      'toml': 'toml',
+      'yaml': 'yaml',
+      'yml': 'yaml',
+      'json': 'json',
+      'jsonc': 'json',
+      'xml': 'xml',
+      'ini': 'ini',
+      'cfg': 'ini',
+      'conf': 'conf',
+      
+      // Documentation
+      'md': 'markdown',
+      'mdx': 'markdown',
+      'rst': 'restructuredtext',
       'txt': 'text',
+      'pdf': 'pdf',
+      
+      // Data & Benchmark Files
+      'csv': 'csv',
+      'tsv': 'tsv',
+      'data': 'binary',
+      'perf': 'perfdata',
+      'svg': 'svg',
+      'png': 'image',
+      'jpg': 'image',
+      'jpeg': 'image',
+      'gif': 'image',
+      'webp': 'image',
+      
+      // Web
       'html': 'html',
+      'htm': 'html',
       'css': 'css',
       'scss': 'scss',
-      'vue': 'vue'
+      'sass': 'sass',
+      'less': 'less'
     }
+    
+    // Special case for Makefile
+    if (filename.toLowerCase() === 'makefile') {
+      return 'makefile'
+    }
+    
     return languageMap[ext || ''] || 'text'
   }
 

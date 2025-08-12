@@ -1,388 +1,322 @@
 <template>
   <div class="data-visualizer">
-    <div class="viewer-header">
-      <div class="flex items-center justify-between">
-        <h3 class="text-lg font-semibold">{{ file?.name || 'Select a data file' }}</h3>
-        <div class="flex gap-2">
-          <button
-            v-if="file && canCopy"
-            @click="copyToClipboard"
-            class="btn-action"
-            :title="copied ? 'Copied!' : 'Copy data'"
-          >
-            {{ copied ? '✓' : '📋' }} {{ copied ? 'Copied' : 'Copy' }}
-          </button>
-          <button
-            v-if="file"
-            @click="downloadFile"
-            class="btn-action"
-            title="Download file"
-          >
-            ⬇️ Download
-          </button>
-        </div>
-      </div>
-      <div v-if="file" class="text-sm text-gray-500 mt-1">
-        Type: {{ getFileType(file) }}
-        <span v-if="file.size" class="ml-3">Size: {{ formatFileSize(file.size) }}</span>
+    <!-- JSON Data Viewer -->
+    <div v-if="isJson" class="json-viewer">
+      <pre class="json-content">{{ formattedJson }}</pre>
+    </div>
+
+    <!-- CSV/TSV Table Viewer -->
+    <div v-else-if="isCsv || isTsv" class="table-viewer">
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th v-for="header in tableHeaders" :key="header">{{ header }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(row, index) in tableRows" :key="index">
+              <td v-for="header in tableHeaders" :key="header">{{ row[header] }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-    
-    <div class="viewer-content">
-      <LoadingState 
-        v-if="loading" 
-        message="Loading data..."
-        size="medium"
-      />
-      
-      <div v-else-if="error" class="error-message">
-        Error loading file: {{ error }}
-      </div>
-      
-      <div v-else-if="!file" class="empty-state">
-        <p class="text-gray-500">Select a data file to view its contents</p>
-      </div>
-      
-      <!-- SVG Display -->
-      <div v-else-if="isSvg" class="svg-container">
-        <div class="svg-controls">
-          <button @click="zoomIn" class="zoom-btn">🔍+</button>
-          <button @click="zoomOut" class="zoom-btn">🔍-</button>
-          <button @click="resetZoom" class="zoom-btn">Reset</button>
-        </div>
-        <div 
-          class="svg-content" 
-          :style="{ transform: `scale(${zoomLevel})` }"
-          v-html="content"
-        ></div>
-      </div>
-      
-      <!-- Image Display -->
-      <div v-else-if="isImage" class="image-viewer">
-        <img :src="imageUrl" :alt="file.name" class="max-w-full h-auto" />
-      </div>
-      
-      <!-- PDF Display -->
-      <div v-else-if="isPdf" class="pdf-viewer">
-        <div class="pdf-notice">
-          <h4 class="text-lg font-semibold mb-2">📄 PDF Document</h4>
-          <p class="text-gray-600 mb-4">{{ file.name }}</p>
-          <div class="flex gap-4">
-            <a :href="imageUrl" target="_blank" class="pdf-action-btn">
-              🔍 View in New Tab
-            </a>
-            <button @click="downloadFile" class="pdf-action-btn">
-              ⬇️ Download PDF
-            </button>
-          </div>
-        </div>
-        <div class="pdf-embed mt-4">
-          <embed :src="imageUrl" type="application/pdf" class="w-full h-96">
+
+    <!-- Image Viewer (PNG, SVG) -->
+    <div v-else-if="isImage" class="image-viewer">
+      <img :src="fileUrl" :alt="fileName" class="visualization-image" />
+    </div>
+
+    <!-- SVG Viewer -->
+    <div v-else-if="isSvg" class="svg-viewer">
+      <div v-html="content" class="svg-container"></div>
+    </div>
+
+    <!-- Performance Data Viewer -->
+    <div v-else-if="isPerfData" class="perf-viewer">
+      <div class="perf-info">
+        <div class="info-icon">⚡</div>
+        <h3>Performance Profile Data</h3>
+        <p>{{ fileName }}</p>
+        <div class="perf-actions">
+          <button @click="downloadFile" class="btn-download">
+            📥 Download Raw Data
+          </button>
+          <p class="perf-note">
+            Use perf report or flamegraph tools to analyze this data
+          </p>
         </div>
       </div>
-      
-      <!-- JSON Display -->
-      <div v-else-if="isJson" class="json-viewer">
-        <pre class="json-content">{{ formattedJson }}</pre>
-      </div>
-      
-      <!-- CSV Display -->
-      <div v-else-if="isCsv" class="csv-viewer">
-        <div class="table-container">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th v-for="(header, index) in csvHeaders" :key="index">
-                  {{ header }}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(row, rowIndex) in csvData" :key="rowIndex">
-                <td v-for="(cell, cellIndex) in row" :key="cellIndex">
-                  {{ cell }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    </div>
+
+    <!-- PDF Viewer -->
+    <div v-else-if="isPdf" class="pdf-viewer">
+      <div class="pdf-info">
+        <div class="info-icon">📕</div>
+        <h3>PDF Document</h3>
+        <p>{{ fileName }}</p>
+        <div class="pdf-actions">
+          <a :href="fileUrl" target="_blank" class="btn-view">
+            👁️ View PDF
+          </a>
+          <button @click="downloadFile" class="btn-download">
+            📥 Download PDF
+          </button>
         </div>
       </div>
-      
-      <!-- YAML Display -->
-      <div v-else-if="isYaml" class="yaml-viewer">
-        <pre class="yaml-content">{{ content }}</pre>
-      </div>
-      
-      <!-- Markdown Display -->
-      <div v-else-if="isMarkdown" class="markdown-viewer prose prose-sm max-w-none" v-html="renderedMarkdown"></div>
-      
-      <!-- Default text display -->
-      <div v-else class="text-viewer">
-        <pre class="text-content">{{ content || 'Empty file' }}</pre>
+    </div>
+
+    <!-- Text/Markdown Viewer -->
+    <div v-else-if="isText || isMarkdown" class="text-viewer">
+      <div v-if="isMarkdown" v-html="renderedMarkdown" class="markdown-content"></div>
+      <pre v-else class="text-content">{{ content }}</pre>
+    </div>
+
+    <!-- Binary/Unknown File -->
+    <div v-else class="binary-viewer">
+      <div class="binary-info">
+        <div class="info-icon">📦</div>
+        <h3>Binary File</h3>
+        <p>{{ fileName }}</p>
+        <p class="file-size">Size: {{ formatFileSize(fileSize) }}</p>
+        <button @click="downloadFile" class="btn-download">
+          📥 Download File
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import type { FileNode } from '@/types/resources'
 import { formatFileSize } from '@/utils/fileHelpers'
-import { useServices } from '@/composables/useServices'
-import LoadingState from '@/components/LoadingState.vue'
-import MarkdownIt from 'markdown-it'
+// import { useServices } from '@/composables/useServices' // Reserved for future use
 
 interface Props {
-  file: FileNode | null
+  file: FileNode
+  content?: string
+  fileUrl?: string
+  fileSize?: number
 }
 
 const props = defineProps<Props>()
+// const { fileService } = useServices() // Reserved for future use
 
-const md = new MarkdownIt({
-  html: true,
-  linkify: true,
-  typographer: true
-})
+const fileName = computed(() => props.file.name)
+const fileExtension = computed(() => props.file.extension?.toLowerCase() || '')
 
-const { fileService, performanceService } = useServices()
-const content = ref<string>('')
-const loading = ref(false)
-const error = ref<string | null>(null)
-const copied = ref(false)
-const zoomLevel = ref(1)
+// File type checks
+const isJson = computed(() => fileExtension.value === 'json')
+const isCsv = computed(() => fileExtension.value === 'csv')
+const isTsv = computed(() => fileExtension.value === 'tsv')
+const isImage = computed(() => ['png', 'jpg', 'jpeg', 'gif', 'webp'].includes(fileExtension.value))
+const isSvg = computed(() => fileExtension.value === 'svg')
+const isPerfData = computed(() => ['data', 'perf'].includes(fileExtension.value))
+const isPdf = computed(() => fileExtension.value === 'pdf')
+const isText = computed(() => ['txt', 'log', 'out'].includes(fileExtension.value))
+const isMarkdown = computed(() => ['md', 'mdx'].includes(fileExtension.value))
 
-const csvHeaders = ref<string[]>([])
-const csvData = ref<string[][]>([])
-
-const getFileType = (file: FileNode): string => {
-  const ext = file.extension?.toLowerCase()
-  const typeMap: Record<string, string> = {
-    'svg': 'SVG Vector Graphics',
-    'png': 'PNG Image',
-    'jpg': 'JPEG Image',
-    'jpeg': 'JPEG Image',
-    'json': 'JSON Data',
-    'csv': 'CSV Table',
-    'yaml': 'YAML Configuration',
-    'yml': 'YAML Configuration',
-    'md': 'Markdown Document',
-    'txt': 'Plain Text',
-    'pdf': 'PDF Document'
-  }
-  return typeMap[ext || ''] || 'Unknown'
-}
-
-const isImage = computed(() => {
-  const imageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'webp']
-  return props.file?.extension && imageExtensions.includes(props.file.extension.toLowerCase())
-})
-
-const isSvg = computed(() => props.file?.extension?.toLowerCase() === 'svg')
-const isJson = computed(() => props.file?.extension?.toLowerCase() === 'json')
-const isCsv = computed(() => props.file?.extension?.toLowerCase() === 'csv')
-const isYaml = computed(() => ['yaml', 'yml'].includes(props.file?.extension?.toLowerCase() || ''))
-const isMarkdown = computed(() => props.file?.extension?.toLowerCase() === 'md')
-const isPdf = computed(() => props.file?.extension?.toLowerCase() === 'pdf')
-
-const canCopy = computed(() => !isImage.value)
-
-const imageUrl = computed(() => {
-  return props.file ? fileService.getDownloadUrl(props.file.path) : ''
-})
-
+// JSON formatting
 const formattedJson = computed(() => {
-  if (!isJson.value || !content.value) return ''
+  if (!isJson.value || !props.content) return ''
   try {
-    return JSON.stringify(JSON.parse(content.value), null, 2)
+    const parsed = JSON.parse(props.content)
+    return JSON.stringify(parsed, null, 2)
   } catch {
-    return content.value
+    return props.content
   }
 })
 
-const renderedMarkdown = computed(() => {
-  if (!isMarkdown.value || !content.value) return ''
-  return md.render(content.value)
-})
+// CSV/TSV parsing
+const tableHeaders = ref<string[]>([])
+const tableRows = ref<Record<string, string>[]>([])
 
-const parseCsv = (text: string) => {
-  const lines = text.trim().split('\n')
+const parseTableData = (content: string, delimiter: string) => {
+  const lines = content.trim().split('\n')
   if (lines.length === 0) return
-  
-  csvHeaders.value = lines[0].split(',').map(h => h.trim())
-  csvData.value = lines.slice(1).map(line => 
-    line.split(',').map(cell => cell.trim())
-  )
+
+  // Parse headers
+  tableHeaders.value = lines[0].split(delimiter).map(h => h.trim())
+
+  // Parse rows
+  tableRows.value = lines.slice(1).map(line => {
+    const values = line.split(delimiter)
+    const row: Record<string, string> = {}
+    tableHeaders.value.forEach((header, index) => {
+      row[header] = values[index]?.trim() || ''
+    })
+    return row
+  })
 }
 
-watch(() => props.file, async (newFile) => {
-  if (!newFile || newFile.type === 'directory') {
-    content.value = ''
-    csvHeaders.value = []
-    csvData.value = []
-    return
-  }
+// Markdown rendering (simplified - in production, use markdown-it)
+const renderedMarkdown = computed(() => {
+  if (!isMarkdown.value || !props.content) return ''
   
-  if (isImage.value) {
-    return
-  }
-  
-  loading.value = true
-  error.value = null
-  
-  try {
-    await performanceService.measureAsync('fetchDataContent', async () => {
-      content.value = await fileService.fetchFileContent(newFile.path)
+  // Very basic markdown rendering
+  let html = props.content
+    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+    .replace(/\*\*(.*)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*)\*/g, '<em>$1</em>')
+    .replace(/```[\s\S]*?```/g, (match) => {
+      const code = match.replace(/```/g, '')
+      return `<pre><code>${code}</code></pre>`
     })
-    
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\n/g, '<br>')
+  
+  return html
+})
+
+// Watch for content changes
+watch(() => props.content, (newContent) => {
+  if (newContent) {
     if (isCsv.value) {
-      parseCsv(content.value)
+      parseTableData(newContent, ',')
+    } else if (isTsv.value) {
+      parseTableData(newContent, '\t')
     }
-  } catch (e) {
-    error.value = e instanceof Error ? e.message : 'Failed to load file'
-  } finally {
-    loading.value = false
   }
 }, { immediate: true })
 
-const copyToClipboard = async () => {
-  if (!content.value) return
-  
-  try {
-    await navigator.clipboard.writeText(content.value)
-    copied.value = true
-    setTimeout(() => {
-      copied.value = false
-    }, 2000)
-  } catch (e) {
-    console.error('Failed to copy:', e)
-  }
-}
-
+// Download functionality
 const downloadFile = () => {
-  if (!props.file) return
+  if (!props.fileUrl) return
   
-  const url = fileService.getDownloadUrl(props.file.path)
   const link = document.createElement('a')
-  link.href = url
-  link.download = props.file.name
+  link.href = props.fileUrl
+  link.download = fileName.value
+  document.body.appendChild(link)
   link.click()
-}
-
-const zoomIn = () => {
-  zoomLevel.value = Math.min(zoomLevel.value + 0.25, 3)
-}
-
-const zoomOut = () => {
-  zoomLevel.value = Math.max(zoomLevel.value - 0.25, 0.5)
-}
-
-const resetZoom = () => {
-  zoomLevel.value = 1
+  document.body.removeChild(link)
 }
 </script>
 
 <style scoped>
 .data-visualizer {
-  @apply bg-white rounded-lg shadow-sm border border-gray-200 h-full flex flex-col;
+  @apply bg-white rounded-lg shadow-sm p-4;
 }
 
-.viewer-header {
-  @apply p-4 border-b border-gray-200;
+/* JSON Viewer */
+.json-viewer {
+  @apply overflow-auto;
 }
 
-.viewer-content {
-  @apply flex-1 overflow-auto;
-}
-
-.btn-action {
-  @apply px-3 py-1 text-sm bg-pycon-blue text-white rounded hover:bg-opacity-90 transition-colors;
-}
-
-.empty-state {
-  @apply flex items-center justify-center h-64;
-}
-
-.error-message {
-  @apply p-4 text-red-600 bg-red-50;
-}
-
-.svg-container {
-  @apply relative;
-}
-
-.svg-controls {
-  @apply absolute top-4 right-4 z-10 flex gap-2;
-}
-
-.zoom-btn {
-  @apply px-2 py-1 bg-white border border-gray-300 rounded text-sm hover:bg-gray-50;
-}
-
-.svg-content {
-  @apply p-4 transition-transform origin-center;
-}
-
-.svg-content :deep(svg) {
-  @apply max-w-full h-auto;
-}
-
-.image-viewer {
-  @apply p-4 flex items-center justify-center;
-}
-
-.json-viewer, .yaml-viewer, .text-viewer {
-  @apply p-4;
-}
-
-.json-content, .yaml-content, .text-content {
+.json-content {
   @apply text-sm font-mono bg-gray-50 p-4 rounded overflow-x-auto;
+  max-height: 600px;
 }
 
-.csv-viewer {
-  @apply p-4;
-}
-
+/* Table Viewer */
 .table-container {
-  @apply overflow-x-auto;
+  @apply overflow-auto;
+  max-height: 600px;
 }
 
 .data-table {
-  @apply min-w-full border-collapse;
+  @apply w-full text-sm;
 }
 
 .data-table th {
-  @apply px-4 py-2 bg-gray-100 border border-gray-300 text-left font-semibold text-sm;
+  @apply bg-gray-100 px-4 py-2 text-left font-semibold sticky top-0;
 }
 
 .data-table td {
-  @apply px-4 py-2 border border-gray-300 text-sm;
+  @apply px-4 py-2 border-b border-gray-200;
 }
 
-.data-table tbody tr:hover {
+.data-table tr:hover {
   @apply bg-gray-50;
 }
 
-.markdown-viewer {
-  @apply p-4;
+/* Image Viewer */
+.image-viewer {
+  @apply flex justify-center items-center p-4;
 }
 
-.pdf-viewer {
-  @apply p-4;
+.visualization-image {
+  @apply max-w-full h-auto rounded shadow-md;
+  max-height: 600px;
 }
 
-.pdf-notice {
-  @apply bg-gray-50 border border-gray-200 rounded-lg p-4;
+/* SVG Viewer */
+.svg-container {
+  @apply flex justify-center items-center p-4;
+  max-height: 600px;
+  overflow: auto;
 }
 
-.pdf-action-btn {
-  @apply px-4 py-2 bg-pycon-blue text-white rounded hover:bg-opacity-90 transition-colors text-sm font-medium;
+.svg-container :deep(svg) {
+  @apply max-w-full h-auto;
 }
 
-.pdf-embed {
-  @apply border border-gray-300 rounded;
+/* Performance Data Viewer */
+.perf-viewer, .pdf-viewer, .binary-viewer {
+  @apply flex flex-col items-center justify-center py-12;
 }
 
-.pdf-embed embed {
-  @apply min-h-96;
+.perf-info, .pdf-info, .binary-info {
+  @apply text-center;
+}
+
+.info-icon {
+  @apply text-6xl mb-4;
+}
+
+.perf-actions, .pdf-actions {
+  @apply mt-6 space-y-4;
+}
+
+.perf-note {
+  @apply text-sm text-gray-600 mt-4;
+}
+
+.file-size {
+  @apply text-sm text-gray-600 mt-2;
+}
+
+/* Text/Markdown Viewer */
+.text-content {
+  @apply text-sm font-mono bg-gray-50 p-4 rounded overflow-auto;
+  max-height: 600px;
+}
+
+.markdown-content {
+  @apply text-sm leading-relaxed;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.markdown-content :deep(h1) {
+  @apply text-2xl font-bold mb-4;
+}
+
+.markdown-content :deep(h2) {
+  @apply text-xl font-bold mb-3;
+}
+
+.markdown-content :deep(h3) {
+  @apply text-lg font-bold mb-2;
+}
+
+.markdown-content :deep(pre) {
+  @apply bg-gray-100 p-3 rounded overflow-x-auto;
+}
+
+.markdown-content :deep(code) {
+  @apply bg-gray-100 px-1 py-0.5 rounded text-sm;
+}
+
+/* Buttons */
+.btn-download, .btn-view {
+  @apply inline-flex items-center px-4 py-2 bg-pycon-blue text-white rounded hover:bg-opacity-90 transition-colors;
+}
+
+.btn-view {
+  @apply mr-4;
 }
 </style>

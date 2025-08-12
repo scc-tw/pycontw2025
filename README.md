@@ -74,17 +74,9 @@ pycontw2025/
 
 1. Place your source code files in `/public/resources/source/`
 2. Place your data files in `/public/resources/data/`
-3. Update `/public/manifest.json` with your file paths:
+3. Run `npm run build` - the manifest.json will be auto-generated
 
-```json
-{
-  "version": "1.0.0",
-  "files": [
-    "resources/source/benchmarks/cpu/test.py",
-    "resources/data/results/2025/metrics.csv"
-  ]
-}
-```
+**Note**: The `manifest.json` is automatically generated from your files - no manual editing needed!
 
 ## 🌐 Custom Domain Setup
 
@@ -103,7 +95,8 @@ Add these DNS records in Cloudflare:
 Type: CNAME
 Name: pycontw2025
 Target: scc-tw.github.io
-Proxy: ON (orange cloud)
+Proxy: DNS only (gray cloud)  # Important for GitHub Pages
+TTL: Auto
 ```
 
 ### SSL/TLS Settings in Cloudflare
@@ -114,31 +107,67 @@ Proxy: ON (orange cloud)
 
 ## 🚀 Deployment
 
-The project includes GitHub Actions workflow for automatic deployment:
+### Automatic Deployment via GitHub Actions
 
-```yaml
-# .github/workflows/deploy.yml
-- Builds on push to main branch
-- Deploys to GitHub Pages
-- Supports custom domain via CNAME file
+This project automatically deploys to GitHub Pages when you push to the `main` branch.
+
+#### Setup GitHub Pages:
+
+1. Go to your repository Settings → Pages
+2. Under **Source**, select **GitHub Actions**
+3. The site will deploy automatically on every push to `main`
+
+#### How it works:
+
+1. **Push to main** → GitHub Actions triggers
+2. **Build Process**:
+   - Installs dependencies
+   - Scans `/public/resources/` directory
+   - Auto-generates `manifest.json` with all files
+   - Builds Vue application
+   - Copies all public files to dist
+3. **Deploy** → Publishes to GitHub Pages with custom domain
+
+#### Manual Deployment:
+
+1. Go to **Actions** tab in your repository
+2. Select **Deploy to GitHub Pages** workflow
+3. Click **Run workflow** → Select `main` branch → Run
+
+#### Adding New Files:
+
+```bash
+# Add files to public/resources/
+public/resources/
+├── data/        # CSV, JSON, SVG files
+└── source/      # Python, C++, Rust code
+
+# Commit and push - auto deploys!
+git add .
+git commit -m "Add new benchmark data"
+git push origin main
 ```
 
 ## 📊 Supported File Types
 
 ### Source Code
-- Python (.py)
+- Python (.py, .pyx, .pyi)
+- Rust (.rs)
+- C/C++ (.c, .h, .cpp, .cc, .hpp)
+- Shell (.sh, .bash, .zsh)
+- TypeScript/JavaScript (.ts, .js, .tsx, .jsx)
 - YAML (.yaml, .yml)
-- JSON (.json)
-- Shell (.sh, .bash)
-- Markdown (.md)
-- TypeScript/JavaScript (.ts, .js)
+- TOML (.toml)
+- Makefile
 
 ### Data Formats
-- CSV - Rendered as tables
-- JSON - Formatted display
-- SVG - Vector graphics with zoom
-- Images - PNG, JPG, GIF
-- Markdown - Rendered HTML
+- CSV/TSV - Interactive tables
+- JSON - Pretty-printed with syntax highlighting
+- Performance data (.data, .perf) - Download links
+- SVG - Inline rendering with zoom
+- Images - PNG, JPG, GIF, WebP
+- PDF - View/download options
+- Markdown - Basic HTML rendering
 
 ## 🎨 Customization
 
@@ -172,7 +201,8 @@ const iconMap: Record<string, string> = {
 ## 📝 Scripts
 
 - `npm run dev` - Start development server
-- `npm run build` - Build for production
+- `npm run generate-manifest` - Generate file manifest from public/resources/
+- `npm run build` - Generate manifest + build for production
 - `npm run preview` - Preview production build
 - `npm run type-check` - Run TypeScript checks
 - `npm run lint` - Run ESLint
@@ -187,7 +217,7 @@ const iconMap: Record<string, string> = {
 
 ## 📄 License
 
-MIT License - Feel free to use this for your presentations!
+GPL-3.0-or-later. See `LICENSE` for details.
 
 ## 🙏 Acknowledgments
 

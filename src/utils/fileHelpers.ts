@@ -65,25 +65,76 @@ const transformToFileTree = (
 export const detectLanguage = (filename: string): string => {
   const ext = filename.split('.').pop()?.toLowerCase()
   const languageMap: Record<string, string> = {
+    // Programming Languages
     'py': 'python',
+    'pyx': 'cython',
+    'pyi': 'python',
+    'rs': 'rust',
+    'c': 'c',
+    'h': 'c',
+    'cpp': 'cpp',
+    'cc': 'cpp',
+    'cxx': 'cpp',
+    'hpp': 'cpp',
+    'hxx': 'cpp',
     'ts': 'typescript',
+    'tsx': 'typescriptreact',
     'js': 'javascript',
-    'json': 'json',
-    'yaml': 'yaml',
-    'yml': 'yaml',
-    'md': 'markdown',
+    'jsx': 'javascriptreact',
+    'vue': 'vue',
+    
+    // Shell & Scripts
     'sh': 'shell',
     'bash': 'shell',
-    'svg': 'svg',
-    'csv': 'csv',
+    'zsh': 'shell',
+    'fish': 'shell',
+    
+    // Build & Config
+    'makefile': 'makefile',
+    'mk': 'makefile',
+    'toml': 'toml',
+    'yaml': 'yaml',
+    'yml': 'yaml',
+    'json': 'json',
+    'jsonc': 'json',
+    'xml': 'xml',
+    'ini': 'ini',
+    'cfg': 'ini',
+    'conf': 'conf',
+    
+    // Documentation
+    'md': 'markdown',
+    'mdx': 'markdown',
+    'rst': 'restructuredtext',
     'txt': 'text',
+    'pdf': 'pdf',
+    
+    // Data & Benchmark Files
+    'csv': 'csv',
+    'tsv': 'tsv',
+    'data': 'binary',
+    'perf': 'perfdata',
+    'svg': 'svg',
+    'png': 'image',
+    'jpg': 'image',
+    'jpeg': 'image',
+    'gif': 'image',
+    'webp': 'image',
+    
+    // Web
     'html': 'html',
+    'htm': 'html',
     'css': 'css',
     'scss': 'scss',
-    'vue': 'vue',
-    'tsx': 'typescriptreact',
-    'jsx': 'javascriptreact'
+    'sass': 'sass',
+    'less': 'less'
   }
+  
+  // Special case for Makefile
+  if (filename.toLowerCase() === 'makefile') {
+    return 'makefile'
+  }
+  
   return languageMap[ext || ''] || 'text'
 }
 
@@ -93,18 +144,50 @@ export const getFileIcon = (node: FileNode): string => {
   }
   
   const iconMap: Record<string, string> = {
+    // Programming Languages
     'python': '🐍',
+    'cython': '🐍',
+    'rust': '🦀',
+    'c': '🔷',
+    'cpp': '🔶',
     'javascript': '📜',
+    'javascriptreact': '⚛️',
     'typescript': '📘',
-    'json': '📋',
-    'yaml': '⚙️',
-    'markdown': '📝',
+    'typescriptreact': '⚛️',
+    'vue': '💚',
+    
+    // Shell & Scripts
     'shell': '🖥️',
-    'svg': '🎨',
+    
+    // Build & Config
+    'makefile': '🔨',
+    'toml': '⚙️',
+    'yaml': '⚙️',
+    'json': '📋',
+    'xml': '📄',
+    'ini': '⚙️',
+    'conf': '⚙️',
+    
+    // Documentation
+    'markdown': '📝',
+    'restructuredtext': '📝',
+    'text': '📄',
+    'pdf': '📕',
+    
+    // Data & Benchmark Files
     'csv': '📊',
+    'tsv': '📊',
+    'binary': '💾',
+    'perfdata': '⚡',
+    'svg': '🎨',
+    'image': '🖼️',
+    
+    // Web
     'html': '🌐',
     'css': '🎨',
-    'vue': '💚'
+    'scss': '🎨',
+    'sass': '🎨',
+    'less': '🎨'
   }
   
   return iconMap[node.language || ''] || '📄'
@@ -114,34 +197,87 @@ export const getFileIcon = (node: FileNode): string => {
 export const getMockFileTree = (basePath: string): FileNode[] => {
   const mockStructure = {
     source: {
-      benchmarks: {
-        cpu: ['test_performance.py', 'config.yaml', 'README.md'],
-        memory: ['memory_test.py', 'memory_profile.json'],
-        io: ['disk_benchmark.py', 'network_test.py']
-      },
+      // Python test suite
       tests: {
-        unit: ['test_utils.py', 'test_core.py'],
-        integration: ['test_api.py', 'test_workflow.py'],
-        e2e: ['test_full_flow.py']
+        unit: ['test_utils.py', 'test_core.py', 'test_benchmarks.py', 'conftest.py'],
+        integration: ['test_api.py', 'test_workflow.py', 'test_performance.py'],
+        e2e: ['test_full_flow.py', 'test_system.py'],
+        fixtures: ['data.json', 'config.toml', 'test_data.csv']
       },
-      scripts: ['setup.sh', 'run_benchmarks.py', 'analyze_results.py']
+      // Main source code
+      src: {
+        core: ['main.py', 'utils.py', 'config.py', 'types.pyi'],
+        benchmarks: ['cpu_bench.py', 'memory_bench.py', 'io_bench.py', 'network_bench.py'],
+        analysis: ['analyzer.py', 'reporter.py', 'visualizer.py'],
+        native: ['optimizer.c', 'fast_compute.cpp', 'bindings.pyx']
+      },
+      // Rust components
+      rust: [
+        'Cargo.toml', 'Cargo.lock', 'lib.rs', 'bench.rs', 
+        'ffi.rs', 'bindings.h'
+      ],
+      // Build files
+      build: ['Makefile', 'setup.py', 'pyproject.toml', 'requirements.txt'],
+      // Scripts
+      scripts: ['run_tests.sh', 'benchmark.sh', 'deploy.sh', 'analyze.py'],
+      // Documentation
+      docs: ['README.md', 'CONTRIBUTING.md', 'API.md', 'CHANGELOG.md']
     },
     data: {
-      results: {
-        '2024': {
-          'q1': ['benchmark_jan.json', 'benchmark_feb.json', 'benchmark_mar.json'],
-          'q2': ['benchmark_apr.json', 'benchmark_may.json', 'benchmark_jun.json']
-        },
-        '2025': {
-          'january': ['performance_metrics.csv', 'memory_usage.json', 'summary.md']
-        }
+      // Benchmark results
+      benchmarks: {
+        cpu: [
+          'cpu_profile.json', 'cpu_benchmark.csv', 'cpu_report.txt',
+          'cpu_flame.svg', 'cpu_timeline.png'
+        ],
+        memory: [
+          'memory_profile.json', 'heap_dump.data', 'memory_usage.csv',
+          'memory_graph.svg', 'allocation_chart.png'
+        ],
+        io: [
+          'disk_benchmark.json', 'io_perf.data', 'throughput.csv',
+          'io_heatmap.svg', 'latency_distribution.png'
+        ],
+        network: [
+          'network_trace.json', 'packet_analysis.csv', 'bandwidth.txt',
+          'network_topology.svg', 'latency_map.png'
+        ]
       },
+      // Performance data
+      perf: [
+        'perf.data', 'perf_report.txt', 'flamegraph.svg',
+        'callgrind.out', 'cachegrind.out'
+      ],
+      // Analysis results
+      analysis: {
+        '2024': [
+          'q1_analysis.json', 'q2_analysis.json', 'q3_analysis.json', 'q4_analysis.json',
+          'yearly_summary.md', 'trends.csv'
+        ],
+        '2025': [
+          'jan_metrics.json', 'feb_metrics.json', 'current_state.csv',
+          'predictions.json', 'optimization_report.pdf'
+        ]
+      },
+      // Visualizations
       visualizations: {
-        charts: ['performance_chart.svg', 'memory_timeline.svg', 'comparison.svg'],
-        graphs: ['network_graph.svg', 'dependency_graph.svg'],
-        reports: ['final_report.md', 'executive_summary.pdf']
+        charts: [
+          'performance_over_time.svg', 'memory_usage.svg', 'cpu_utilization.svg',
+          'comparison_chart.png', 'heatmap.png'
+        ],
+        graphs: [
+          'dependency_graph.svg', 'call_graph.svg', 'network_topology.svg',
+          'execution_flow.png'
+        ],
+        reports: ['final_report.md', 'executive_summary.pdf', 'technical_details.pdf']
       },
-      slides: ['pycon_tw_2025_presentation.pdf', 'benchmark_analysis.pdf']
+      // Presentation materials
+      slides: [
+        'pycon_tw_2025_presentation.pdf',
+        'benchmark_methodology.pdf',
+        'performance_optimization.pdf',
+        'case_studies.pdf'
+      ]
     }
   }
   

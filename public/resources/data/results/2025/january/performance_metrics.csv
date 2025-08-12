@@ -1,11 +1,11 @@
-Test Name,Execution Time (s),Memory Usage (MB),CPU Usage (%),Status
-Matrix Multiplication 500x500,0.234,95.4,87.3,Pass
-Matrix Multiplication 1000x1000,1.892,381.5,92.1,Pass
-Fibonacci Recursive n=25,0.045,12.3,45.2,Pass
-Fibonacci Recursive n=30,0.512,12.5,48.7,Pass
-List Comprehension 100k,0.018,7.8,23.4,Pass
-List Comprehension 1M,0.195,76.5,25.8,Pass
-Numpy Array Operations,0.089,145.2,78.9,Pass
-Pandas DataFrame Operations,0.342,234.5,65.4,Pass
-Async IO Operations,2.145,45.6,12.3,Pass
-Multiprocessing Pool,1.234,89.7,95.6,Pass
+Test Name,Duration (ms),Memory (MB),CPU (%),Status
+test_cpu_benchmark,125.3,45.2,89.5,PASS
+test_memory_allocation,89.7,128.6,34.2,PASS
+test_disk_io,234.1,23.4,12.8,PASS
+test_network_latency,45.6,18.9,5.3,PASS
+test_parallel_processing,567.8,256.3,95.7,PASS
+test_cache_performance,12.4,64.5,8.9,PASS
+test_database_query,123.5,34.2,15.6,PASS
+test_api_response,67.8,12.3,4.5,PASS
+test_image_processing,890.2,512.7,98.2,PASS
+test_encryption,234.5,78.9,45.6,PASS
