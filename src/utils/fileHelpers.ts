@@ -8,7 +8,7 @@ export const buildFileTree = async (basePath: string): Promise<FileNode[]> => {
       const manifest = await response.json()
       return transformToFileTree(manifest.files || [], basePath)
     }
-  } catch (e) {
+  } catch {
     console.warn('Manifest not found, using mock data')
   }
   
@@ -111,7 +111,7 @@ export const getFileIcon = (node: FileNode): string => {
 }
 
 // Mock data for development
-const getMockFileTree = (basePath: string): FileNode[] => {
+export const getMockFileTree = (basePath: string): FileNode[] => {
   const mockStructure = {
     source: {
       benchmarks: {
@@ -145,7 +145,11 @@ const getMockFileTree = (basePath: string): FileNode[] => {
     }
   }
   
-  const buildMockTree = (obj: any, currentPath: string): FileNode[] => {
+  interface MockStructure {
+    [key: string]: MockStructure | string[]
+  }
+  
+  const buildMockTree = (obj: MockStructure, currentPath: string): FileNode[] => {
     const nodes: FileNode[] = []
     
     Object.entries(obj).forEach(([key, value]) => {

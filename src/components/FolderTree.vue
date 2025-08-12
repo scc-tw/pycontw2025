@@ -1,9 +1,15 @@
 <template>
-  <div class="folder-tree">
+  <div class="folder-tree" role="tree" :aria-label="`File tree level ${level + 1}`">
     <div
-      v-for="node in nodes"
+      v-for="(node, index) in nodes"
       :key="node.path"
       class="tree-node"
+      role="treeitem"
+      :aria-expanded="node.type === 'directory' ? isExpanded(node.path) : undefined"
+      :aria-selected="selectedPath === node.path"
+      :aria-level="level + 1"
+      :aria-setsize="nodes.length"
+      :aria-posinset="index + 1"
     >
       <div
         class="node-item"
@@ -13,7 +19,9 @@
           'node-selected': selectedPath === node.path,
           'ml-4': level > 0
         }"
+        :tabindex="selectedPath === node.path ? 0 : -1"
         @click="handleNodeClick(node)"
+        @keydown="handleKeyDown($event, node)"
       >
         <span class="node-icon">
           <span v-if="node.type === 'directory'">
@@ -71,6 +79,23 @@ const handleNodeClick = (node: FileNode) => {
     emit('toggle', node.path)
   }
   emit('select', node)
+}
+
+const handleKeyDown = (event: KeyboardEvent, node: FileNode) => {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault()
+    handleNodeClick(node)
+  } else if (event.key === 'ArrowRight' && node.type === 'directory') {
+    // Expand directory
+    if (!isExpanded(node.path)) {
+      emit('toggle', node.path)
+    }
+  } else if (event.key === 'ArrowLeft' && node.type === 'directory') {
+    // Collapse directory
+    if (isExpanded(node.path)) {
+      emit('toggle', node.path)
+    }
+  }
 }
 </script>
 

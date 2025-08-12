@@ -26,8 +26,8 @@ export interface BenchmarkData {
   metadata?: {
     tool?: string
     date?: string
-    parameters?: Record<string, any>
-    results?: Record<string, any>
+    parameters?: Record<string, unknown>
+    results?: Record<string, unknown>
   }
 }
 

@@ -30,8 +30,13 @@
                 @select="selectFile"
                 @toggle="toggleFolder"
               />
-              <div v-else-if="loading" class="text-center py-4 text-gray-500">
-                Loading data files...
+              <LoadingState 
+                v-else-if="loading" 
+                message="Loading data files..."
+                size="small"
+              />
+              <div v-else-if="error" class="text-center py-4 text-red-500">
+                {{ error }}
               </div>
               <div v-else class="text-center py-4 text-gray-500">
                 No data files found
@@ -49,25 +54,44 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import type { FileNode } from '@/types/resources'
 import FolderTree from '@/components/FolderTree.vue'
 import DataVisualizer from '@/components/DataVisualizer.vue'
-import { useFileNavigation } from '@/composables/useFileNavigation'
-import { useGitHubContent } from '@/composables/useGitHubContent'
+import LoadingState from '@/components/LoadingState.vue'
+import { useServices } from '@/composables/useServices'
 
-const {
-  navigationState,
-  selectFile,
-  toggleFolder,
-  breadcrumbs
-} = useFileNavigation()
+const { fileService, navigationService, performanceService } = useServices()
 
-const { fetchFileTree, loading } = useGitHubContent()
 const fileTree = ref<FileNode[]>([])
+const loading = ref(false)
+const error = ref<string | null>(null)
+
+// Reactive navigation state
+const navigationState = computed(() => navigationService.getCurrentState())
+const breadcrumbs = computed(() => navigationService.getBreadcrumbs())
+
+const selectFile = (file: FileNode) => {
+  navigationService.selectFile(file)
+}
+
+const toggleFolder = (path: string) => {
+  navigationService.toggleFolder(path)
+}
 
 onMounted(async () => {
-  fileTree.value = await fetchFileTree('resources/data')
+  loading.value = true
+  error.value = null
+  
+  try {
+    await performanceService.measureAsync('fetchDataTree', async () => {
+      fileTree.value = await fileService.fetchFileTree('resources/data')
+    })
+  } catch (e) {
+    error.value = e instanceof Error ? e.message : 'Failed to load data files'
+  } finally {
+    loading.value = false
+  }
 })
 </script>
 

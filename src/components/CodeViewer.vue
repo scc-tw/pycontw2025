@@ -29,9 +29,11 @@
     </div>
     
     <div class="viewer-content">
-      <div v-if="loading" class="flex items-center justify-center h-64">
-        <span class="text-gray-500">Loading...</span>
-      </div>
+      <LoadingState 
+        v-if="loading" 
+        message="Loading file content..."
+        size="medium"
+      />
       
       <div v-else-if="error" class="error-message">
         Error loading file: {{ error }}
@@ -56,7 +58,8 @@
 import { ref, computed, watch } from 'vue'
 import type { FileNode } from '@/types/resources'
 import { formatFileSize } from '@/utils/fileHelpers'
-import { useGitHubContent } from '@/composables/useGitHubContent'
+import { useServices } from '@/composables/useServices'
+import LoadingState from '@/components/LoadingState.vue'
 
 interface Props {
   file: FileNode | null
@@ -64,7 +67,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { fetchFileContent, getDownloadUrl } = useGitHubContent()
+const { fileService, performanceService } = useServices()
 const content = ref<string>('')
 const loading = ref(false)
 const error = ref<string | null>(null)
@@ -80,7 +83,7 @@ const isSvg = computed(() => {
 })
 
 const imageUrl = computed(() => {
-  return props.file ? getDownloadUrl(props.file.path) : ''
+  return props.file ? fileService.getDownloadUrl(props.file.path) : ''
 })
 
 watch(() => props.file, async (newFile) => {
@@ -97,7 +100,9 @@ watch(() => props.file, async (newFile) => {
   error.value = null
   
   try {
-    content.value = await fetchFileContent(newFile.path)
+    await performanceService.measureAsync('fetchFileContent', async () => {
+      content.value = await fileService.fetchFileContent(newFile.path)
+    })
   } catch (e) {
     error.value = e instanceof Error ? e.message : 'Failed to load file'
   } finally {
@@ -122,7 +127,7 @@ const copyToClipboard = async () => {
 const downloadFile = () => {
   if (!props.file) return
   
-  const url = getDownloadUrl(props.file.path)
+  const url = fileService.getDownloadUrl(props.file.path)
   const link = document.createElement('a')
   link.href = url
   link.download = props.file.name
