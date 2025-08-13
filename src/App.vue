@@ -4,7 +4,7 @@
       <div class="container mx-auto px-4">
         <div class="flex items-center justify-between h-16">
           <router-link to="/" class="brand">
-            🐍 PyCon TW 2025 Resources
+            🐍 PyCon TW 2025 FFI
           </router-link>
           
           <div class="nav-links">
@@ -23,7 +23,7 @@
     
     <footer class="app-footer">
       <div class="container mx-auto px-4 py-6 text-center text-sm text-gray-600">
-        <p>© 2025 PyCon Taiwan. Built with Vue 3 + Vite + TypeScript by Claude & SCC</p>
+        <p>© 2025 scc @ CyCraft | PyCon Taiwan 2025 Talk Resources</p>
         <p class="mt-2">
           <a href="https://github.com/scc-tw/pycontw2025" target="_blank" class="footer-link">
             GitHub
