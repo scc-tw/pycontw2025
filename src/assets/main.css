@@ -1,11 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+@layer base {
+  :root {
+    /* Theme 4: Playful Pastel Tech - Friendly and approachable */
+    --color-bg: #FBFDFF;
+    --color-surface: #FFFFFF;
+    --color-ink: #1A1F2C;
+    --color-muted: #5B6472;
+    --color-accent: #00B8D9;
+    --color-border: #D9E6F2;
+  }
+
+  html {
+    @apply font-sans text-body text-theme-ink antialiased;
+  }
+
+  body {
+    @apply bg-theme-bg m-0 p-0;
+  }
+
+  /* Ensure WCAG 2.2 compliant focus states */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-theme-focus rounded-sm;
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Ensure readable line length for body text */
+  .prose {
+    @apply max-w-readable leading-relaxed;
+  }
+
+  /* Card component with soft shadows */
+  .card {
+    @apply bg-theme-surface rounded-lg p-5 border border-theme-border shadow-card;
+  }
+
+  /* Button variants - playful rounded corners */
+  .btn {
+    @apply px-4 py-2 rounded-md font-semibold transition-all duration-[180ms] min-h-[46px] min-w-[44px];
+  }
+
+  .btn-filled {
+    @apply bg-theme-accent text-white hover:bg-theme-hover-accent hover:shadow-hover active:bg-theme-active-accent;
+  }
+
+  .btn-tonal {
+    @apply bg-theme-ui text-theme-accent hover:bg-theme-hover-surface active:bg-theme-active-surface;
+  }
+
+  .btn-ghost {
+    @apply text-theme-accent hover:bg-theme-hover-surface active:bg-theme-active-surface;
+  }
+
+  /* Tag styles - soft pastel backgrounds */
+  .tag {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-label bg-theme-ui text-theme-ink;
+  }
+
+  /* Pill badges for playful elements */
+  .pill {
+    @apply inline-flex items-center px-4 py-2 rounded-full bg-theme-ui text-theme-ink font-semibold;
+  }
+
+  /* Hover animations for interactive elements */
+  .hover-lift {
+    @apply transition-transform duration-[180ms] hover:-translate-y-1;
+  }
 }
 
 #app {
