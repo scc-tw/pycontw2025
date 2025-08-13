@@ -1,0 +1,43 @@
+{
+  "generated": "2025-08-13T05:09:04.088Z",
+  "basePath": "/resources",
+  "totalFiles": 2,
+  "files": [
+    "data/results/2025/january/performance_metrics.csv",
+    "source/benchmarks/cpu/test_performance.py"
+  ],
+  "tree": {
+    "dirs": {
+      "data": {
+        "dirs": {
+          "results": {
+            "dirs": {
+              "2025": {
+                "dirs": {
+                  "january": {
+                    "files": [
+                      "performance_metrics.csv"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "source": {
+        "dirs": {
+          "benchmarks": {
+            "dirs": {
+              "cpu": {
+                "files": [
+                  "test_performance.py"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
