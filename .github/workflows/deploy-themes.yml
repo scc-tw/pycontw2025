@@ -3,15 +3,12 @@ on:
   push:
     branches:
       - main
-      - pycontw2025-theme-1-info-first
-      - pycontw2025-theme-2-editorial-cozy
-      - pycontw2025-theme-3-minimal-monochrome
-      - pycontw2025-theme-4-playful-pastel-tech
-      - pycontw2025-theme-5-warm-civic-sans
   workflow_dispatch:
 
 permissions:
   contents: write  # needed for the deploy action to push commits
+  pages: write     # needed for GitHub Pages deployment
+  id-token: write  # needed for GitHub Pages deployment
 
 jobs:
   build-and-deploy:
@@ -33,36 +30,24 @@ jobs:
             slug: theme-5
     concurrency: pages-${{ matrix.branch }}
     steps:
-      - name: Check if should run
-        id: should_run
-        run: |
-          if [ "${{ github.ref_name }}" == "${{ matrix.branch }}" ]; then
-            echo "should_run=true" >> $GITHUB_OUTPUT
-          else
-            echo "should_run=false" >> $GITHUB_OUTPUT
-          fi
-          
       - uses: actions/checkout@v4
-        if: steps.should_run.outputs.should_run == 'true'
         with:
           ref: ${{ matrix.branch }}
 
       - uses: actions/setup-node@v4
-        if: steps.should_run.outputs.should_run == 'true'
         with:
           node-version: 20
           cache: 'npm'
 
       - run: npm ci
-        if: steps.should_run.outputs.should_run == 'true'
 
       # Build with the right base for subfolders
       - name: Build (subfolder)
-        if: steps.should_run.outputs.should_run == 'true' && matrix.slug != ''
+        if: matrix.slug != ''
         run: npm run build -- --base=/${{ matrix.slug }}/
 
       - name: Build (root)
-        if: steps.should_run.outputs.should_run == 'true' && matrix.slug == ''
+        if: matrix.slug == ''
         run: |
           npm run build
           # Add one-time files at the root site
@@ -73,7 +58,7 @@ jobs:
 
       # Deploy to gh-pages; 'target-folder' publishes under /theme-x/
       - name: Deploy (subfolder)
-        if: steps.should_run.outputs.should_run == 'true' && matrix.slug != ''
+        if: matrix.slug != ''
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
@@ -82,7 +67,7 @@ jobs:
           clean: false  # keep other /theme-* folders
 
       - name: Deploy (root)
-        if: steps.should_run.outputs.should_run == 'true' && matrix.slug == ''
+        if: matrix.slug == ''
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
