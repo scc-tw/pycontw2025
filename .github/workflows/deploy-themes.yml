@@ -31,27 +31,38 @@ jobs:
             slug: theme-4
           - branch: pycontw2025-theme-5-warm-civic-sans
             slug: theme-5
-    if: github.ref_name == matrix.branch
     concurrency: pages-${{ matrix.branch }}
     steps:
+      - name: Check if should run
+        id: should_run
+        run: |
+          if [ "${{ github.ref_name }}" == "${{ matrix.branch }}" ]; then
+            echo "should_run=true" >> $GITHUB_OUTPUT
+          else
+            echo "should_run=false" >> $GITHUB_OUTPUT
+          fi
+          
       - uses: actions/checkout@v4
+        if: steps.should_run.outputs.should_run == 'true'
         with:
           ref: ${{ matrix.branch }}
 
       - uses: actions/setup-node@v4
+        if: steps.should_run.outputs.should_run == 'true'
         with:
           node-version: 20
           cache: 'npm'
 
       - run: npm ci
+        if: steps.should_run.outputs.should_run == 'true'
 
       # Build with the right base for subfolders
       - name: Build (subfolder)
-        if: matrix.slug != ''
+        if: steps.should_run.outputs.should_run == 'true' && matrix.slug != ''
         run: npm run build -- --base=/${{ matrix.slug }}/
 
       - name: Build (root)
-        if: matrix.slug == ''
+        if: steps.should_run.outputs.should_run == 'true' && matrix.slug == ''
         run: |
           npm run build
           # Add one-time files at the root site
@@ -62,7 +73,7 @@ jobs:
 
       # Deploy to gh-pages; 'target-folder' publishes under /theme-x/
       - name: Deploy (subfolder)
-        if: matrix.slug != ''
+        if: steps.should_run.outputs.should_run == 'true' && matrix.slug != ''
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
@@ -71,7 +82,7 @@ jobs:
           clean: false  # keep other /theme-* folders
 
       - name: Deploy (root)
-        if: matrix.slug == ''
+        if: steps.should_run.outputs.should_run == 'true' && matrix.slug == ''
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
