@@ -30,3 +30,6 @@ dist-ssr
 
 # TypeScript cache
 *.tsbuildinfo
+
+# Git worktree directories
+pycontw2025-theme-*/

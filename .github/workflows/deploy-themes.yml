@@ -1,0 +1,79 @@
+name: Deploy themes to GitHub Pages
+on:
+  push:
+    branches:
+      - main
+      - pycontw2025-theme-1-info-first
+      - pycontw2025-theme-2-editorial-cozy
+      - pycontw2025-theme-3-minimal-monochrome
+      - pycontw2025-theme-4-playful-pastel-tech
+      - pycontw2025-theme-5-warm-civic-sans
+  workflow_dispatch:
+
+permissions:
+  contents: write  # needed for the deploy action to push commits
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - branch: main
+            slug: ""           # deploy to root
+          - branch: pycontw2025-theme-1-info-first
+            slug: theme-1
+          - branch: pycontw2025-theme-2-editorial-cozy
+            slug: theme-2
+          - branch: pycontw2025-theme-3-minimal-monochrome
+            slug: theme-3
+          - branch: pycontw2025-theme-4-playful-pastel-tech
+            slug: theme-4
+          - branch: pycontw2025-theme-5-warm-civic-sans
+            slug: theme-5
+    if: github.ref_name == matrix.branch
+    concurrency: pages-${{ matrix.branch }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.branch }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - run: npm ci
+
+      # Build with the right base for subfolders
+      - name: Build (subfolder)
+        if: matrix.slug != ''
+        run: npm run build -- --base=/${{ matrix.slug }}/
+
+      - name: Build (root)
+        if: matrix.slug == ''
+        run: |
+          npm run build
+          # Add one-time files at the root site
+          echo "pycon2025.scc.tw" > dist/CNAME
+          touch dist/.nojekyll
+          # Copy theme switcher page
+          cp theme-switcher.html dist/themes.html
+
+      # Deploy to gh-pages; 'target-folder' publishes under /theme-x/
+      - name: Deploy (subfolder)
+        if: matrix.slug != ''
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
+          target-folder: ${{ matrix.slug }}
+          clean: false  # keep other /theme-* folders
+
+      - name: Deploy (root)
+        if: matrix.slug == ''
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
+          clean: false
