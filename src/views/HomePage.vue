@@ -4,7 +4,7 @@
       <div class="container mx-auto px-4">
         <div class="text-center">
           <div class="mb-4">
-            <span class="text-pycon-gold text-lg font-semibold">PyCon TW 2025 | Day 1 | R3</span>
+            <span class="text-label text-theme-accent">PyCon TW 2025 | Day 1 | R3</span>
           </div>
           <h1 class="hero-title">The Hidden Corners of Python FFI</h1>
           <h2 class="hero-subtitle">Resources & Benchmarks</h2>
@@ -40,7 +40,7 @@
       </div>
       
       <section class="mt-16">
-        <h3 class="text-2xl font-bold text-pycon-blue mb-6">Talk Outline</h3>
+        <h3 class="text-headline text-theme-ink mb-6">Talk Outline</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
           <div class="topic-card">
             <h4 class="topic-title">⚡ FFI Benchmarks</h4>
@@ -66,7 +66,7 @@
       </section>
 
       <section class="mt-8">
-        <h3 class="text-2xl font-bold text-pycon-blue mb-6">Resources</h3>
+        <h3 class="text-headline text-theme-ink mb-6">Resources</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <a href="https://github.com/scc-tw/pycontw2025" target="_blank" class="quick-link">
             📦 GitHub Repository
@@ -97,27 +97,27 @@ onMounted(async () => {
 
 <style scoped>
 .home-page {
-  @apply min-h-screen bg-gray-50;
+  @apply min-h-screen bg-theme-bg;
 }
 
 .hero-section {
-  @apply bg-gradient-to-r from-pycon-blue to-pycon-light-blue text-white py-16;
+  @apply bg-theme-surface text-theme-ink py-16 border-b border-theme-border;
 }
 
 .hero-title {
-  @apply text-5xl font-bold mb-2;
+  @apply text-display mb-2;
 }
 
 .hero-subtitle {
-  @apply text-3xl font-semibold mb-4 text-pycon-gold;
+  @apply text-headline mb-4 text-theme-accent;
 }
 
 .hero-description {
-  @apply text-xl opacity-90;
+  @apply text-title text-theme-muted max-w-readable mx-auto;
 }
 
 .quick-link {
-  @apply flex items-center justify-center p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow text-pycon-blue font-medium;
+  @apply flex items-center justify-center p-4 bg-theme-surface rounded-md border border-theme-border shadow-card hover:shadow-hover transition-all text-theme-accent font-semibold min-h-[44px];
 }
 
 .speaker-info {
@@ -125,18 +125,18 @@ onMounted(async () => {
 }
 
 .speaker-badge, .level-badge, .lang-badge {
-  @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/20 backdrop-blur-sm;
+  @apply inline-flex items-center px-3 py-1 rounded-full text-label bg-theme-ui text-theme-ink;
 }
 
 .topic-card {
-  @apply bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow;
+  @apply bg-theme-surface p-5 rounded-md border border-theme-border shadow-card hover:shadow-hover transition-all;
 }
 
 .topic-title {
-  @apply text-lg font-semibold text-pycon-blue mb-2;
+  @apply text-title text-theme-ink mb-2;
 }
 
 .topic-desc {
-  @apply text-gray-600;
+  @apply text-body text-theme-muted;
 }
 </style>
