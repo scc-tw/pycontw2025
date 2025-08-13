@@ -66,7 +66,7 @@ jobs:
         run: |
           npm run build
           # Add one-time files at the root site
-          echo "pycon2025.scc.tw" > dist/CNAME
+          echo "pycontw2025.scc.tw" > dist/CNAME
           touch dist/.nojekyll
           # Copy theme switcher page
           cp theme-switcher.html dist/themes.html
