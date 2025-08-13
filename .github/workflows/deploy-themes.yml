@@ -14,6 +14,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     strategy:
+      max-parallel: 1  # Deploy one at a time to avoid conflicts
       matrix:
         include:
           - branch: main
@@ -28,7 +29,9 @@ jobs:
             slug: theme-4
           - branch: pycontw2025-theme-5-warm-civic-sans
             slug: theme-5
-    concurrency: pages-${{ matrix.branch }}
+    concurrency: 
+      group: github-pages
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
         with:
