@@ -2,26 +2,26 @@
   <div class="home-page">
     <header class="hero-section">
       <div class="container mx-auto px-4">
-        <div class="text-center">
-          <div class="mb-4">
-            <span class="text-pycon-gold text-lg font-semibold">PyCon TW 2025 | Day 1 | R3</span>
+        <div class="text-center max-w-3xl mx-auto">
+          <div class="mb-3">
+            <span class="text-label uppercase text-theme-muted">PyCon TW 2025 | Day 1 | R3</span>
           </div>
           <h1 class="hero-title">The Hidden Corners of Python FFI</h1>
           <h2 class="hero-subtitle">Resources & Benchmarks</h2>
-          <p class="hero-description mb-4">
+          <p class="hero-description prose mb-4">
             Exploring the complex internals of Python's Foreign Function Interface
           </p>
           <div class="speaker-info">
-            <span class="speaker-badge">👤 scc @ CyCraft</span>
-            <span class="level-badge">🎯 Advanced</span>
-            <span class="lang-badge">🐍 Python Core</span>
+            <span class="tag">👤 scc @ CyCraft</span>
+            <span class="tag">🎯 Advanced</span>
+            <span class="tag">🐍 Python Core</span>
           </div>
         </div>
       </div>
     </header>
     
     <main class="container mx-auto px-4 py-12">
-      <div class="grid md:grid-cols-2 gap-8">
+      <div class="grid md:grid-cols-2 gap-gap-md">
         <ResourceCard
           title="Source Code"
           description="Benchmark scripts for ctypes, cffi, pybind11, and PyO3. Race condition demos and arena leak examples"
@@ -40,8 +40,8 @@
       </div>
       
       <section class="mt-16">
-        <h3 class="text-2xl font-bold text-pycon-blue mb-6">Talk Outline</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+        <h3 class="text-headline text-theme-ink mb-6">Talk Outline</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gap-sm mb-12">
           <div class="topic-card">
             <h4 class="topic-title">⚡ FFI Benchmarks</h4>
             <p class="topic-desc">ctypes vs cffi vs pybind11 vs PyO3 performance comparison</p>
@@ -66,8 +66,8 @@
       </section>
 
       <section class="mt-8">
-        <h3 class="text-2xl font-bold text-pycon-blue mb-6">Resources</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <h3 class="text-headline text-theme-ink mb-6">Resources</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-gap-sm">
           <a href="https://github.com/scc-tw/pycontw2025" target="_blank" class="quick-link">
             📦 GitHub Repository
           </a>
@@ -97,46 +97,42 @@ onMounted(async () => {
 
 <style scoped>
 .home-page {
-  @apply min-h-screen bg-gray-50;
+  @apply min-h-screen bg-theme-bg;
 }
 
 .hero-section {
-  @apply bg-gradient-to-r from-pycon-blue to-pycon-light-blue text-white py-16;
+  @apply bg-theme-surface text-theme-ink py-16 border-b border-theme-border;
 }
 
 .hero-title {
-  @apply text-5xl font-bold mb-2;
+  @apply text-display mb-2;
 }
 
 .hero-subtitle {
-  @apply text-3xl font-semibold mb-4 text-pycon-gold;
+  @apply text-headline mb-4 text-theme-accent;
 }
 
 .hero-description {
-  @apply text-xl opacity-90;
+  @apply text-body text-theme-ink max-w-readable mx-auto leading-relaxed;
 }
 
 .quick-link {
-  @apply flex items-center justify-center p-4 bg-white rounded-lg shadow hover:shadow-md transition-shadow text-pycon-blue font-medium;
+  @apply flex items-center justify-center p-4 bg-theme-surface rounded-sm border border-theme-border hover:bg-theme-hover-surface transition-all text-theme-accent font-semibold min-h-[44px];
 }
 
 .speaker-info {
-  @apply flex flex-wrap gap-3 justify-center mt-4;
-}
-
-.speaker-badge, .level-badge, .lang-badge {
-  @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/20 backdrop-blur-sm;
+  @apply flex flex-wrap gap-gap-sm justify-center mt-4;
 }
 
 .topic-card {
-  @apply bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow;
+  @apply bg-theme-surface p-4 rounded-sm border border-theme-border hover:bg-theme-hover-surface transition-all;
 }
 
 .topic-title {
-  @apply text-lg font-semibold text-pycon-blue mb-2;
+  @apply text-title text-theme-ink mb-2;
 }
 
 .topic-desc {
-  @apply text-gray-600;
+  @apply text-body text-theme-muted;
 }
 </style>
