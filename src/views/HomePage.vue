@@ -71,32 +71,81 @@
 
       <section class="mt-8">
         <h3 class="text-headline text-theme-ink mb-6">Resources</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-gap-md">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gap-md">
           <a href="https://github.com/scc-tw/pycontw2025" target="_blank" class="quick-link hover-lift">
             📦 GitHub Repository
           </a>
           <a href="https://tw.pycon.org/2025/en-us/conference/talk/349" target="_blank" class="quick-link hover-lift">
             🎤 Talk Details on PyCon TW
           </a>
+          <button v-if="slidesAvailable" 
+                  @click="showLicenseModal" 
+                  class="quick-link hover-lift">
+            📄 Download Slides (PDF)
+          </button>
+          <div v-else class="quick-link disabled">
+            📄 Slides Coming Soon
+          </div>
         </div>
       </section>
     </main>
+    
+    <!-- GPL License Modal -->
+    <LicenseModal 
+      v-model="licenseModalVisible"
+      @accept="handleLicenseAccept"
+      @decline="handleLicenseDecline"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import ResourceCard from '@/components/ResourceCard.vue'
+import LicenseModal from '@/components/LicenseModal.vue'
 
 const sourceFileCount = ref(0)
 const dataFileCount = ref(0)
+// Point to the PDF file in public directory
+const slidePdfUrl = ref('/slides.pdf')
+const slidesAvailable = ref(false)
+const licenseModalVisible = ref(false)
 
 onMounted(async () => {
   // In production, fetch actual file counts
   // For now, using placeholder values
   sourceFileCount.value = 42
   dataFileCount.value = 28
+  
+  // Check if slides PDF exists (you can implement actual check if needed)
+  // For now, we'll assume it will be added
+  slidesAvailable.value = true // Set to true when PDF is available
 })
+
+// Show the license modal
+const showLicenseModal = () => {
+  licenseModalVisible.value = true
+}
+
+// Handle license acceptance - download the file
+const handleLicenseAccept = () => {
+  // Create a temporary link element to trigger download
+  const link = document.createElement('a')
+  link.href = slidePdfUrl.value
+  link.download = 'PyCon_TW_2025_FFI_Slides.pdf'
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+  
+  // Optional: Track acceptance or show success message
+  console.log('GPL License accepted - downloading slides')
+}
+
+// Handle license decline
+const handleLicenseDecline = () => {
+  // Optional: Show a message or track decline
+  console.log('GPL License declined - download cancelled')
+}
 </script>
 
 <style scoped>
@@ -127,6 +176,10 @@ onMounted(async () => {
 
 .quick-link {
   @apply flex items-center justify-center p-5 bg-theme-surface rounded-lg border border-theme-border shadow-card hover:shadow-hover transition-all text-theme-accent font-semibold min-h-[46px];
+}
+
+.quick-link.disabled {
+  @apply opacity-50 cursor-not-allowed hover:shadow-card text-theme-muted;
 }
 
 .speaker-info {

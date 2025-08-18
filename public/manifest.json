@@ -1,7 +1,7 @@
 {
-  "generated": "2025-08-18T08:47:56.333Z",
+  "generated": "2025-08-18T09:04:58.098Z",
   "basePath": "/resources",
-  "totalFiles": 256,
+  "totalFiles": 253,
   "files": [
     "data/Py03-gil-nogil-diff-flamegraph/pyo3_diff_flame.svg",
     "data/Py03-gil-nogil-diff-flamegraph/pyo3_gil_flame.svg",
@@ -175,9 +175,6 @@
     "source/tests/benchmark-ffi/implementations/pyo3_impl/pyo3_bench.py",
     "source/tests/benchmark-ffi/implementations/pyo3_impl/pyproject.toml",
     "source/tests/benchmark-ffi/implementations/pyo3_impl/src/lib.rs",
-    "source/tests/benchmark-ffi/implementations/pyo3_impl/target/release/build/pyo3-build-config-2e914cd9ddfb3d25/out/pyo3-build-config-file.txt",
-    "source/tests/benchmark-ffi/implementations/pyo3_impl/target/release/build/pyo3-build-config-2e914cd9ddfb3d25/out/pyo3-build-config.txt",
-    "source/tests/benchmark-ffi/implementations/pyo3_impl/target/release/build/target-lexicon-95ce419fc69fc3e5/out/host.rs",
     "source/tests/benchmark-ffi/lib/Makefile",
     "source/tests/benchmark-ffi/lib/benchlib.c",
     "source/tests/benchmark-ffi/requirements/requirements_3.13.5-gil.txt",
@@ -538,37 +535,6 @@
                             "files": [
                               "lib.rs"
                             ]
-                          },
-                          "target": {
-                            "dirs": {
-                              "release": {
-                                "dirs": {
-                                  "build": {
-                                    "dirs": {
-                                      "pyo3-build-config-2e914cd9ddfb3d25": {
-                                        "dirs": {
-                                          "out": {
-                                            "files": [
-                                              "pyo3-build-config-file.txt",
-                                              "pyo3-build-config.txt"
-                                            ]
-                                          }
-                                        }
-                                      },
-                                      "target-lexicon-95ce419fc69fc3e5": {
-                                        "dirs": {
-                                          "out": {
-                                            "files": [
-                                              "host.rs"
-                                            ]
-                                          }
-                                        }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
                           }
                         }
                       }
