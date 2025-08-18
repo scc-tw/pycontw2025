@@ -1,11 +1,11 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
 import SourceCode from '@/views/SourceCode.vue'
 import BenchmarkData from '@/views/BenchmarkData.vue'
 
 const router = createRouter({
-  // Use hash mode for GitHub Pages compatibility
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  // Use history mode for clean URLs with custom domain
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
