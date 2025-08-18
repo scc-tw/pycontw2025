@@ -1,0 +1,126 @@
+{
+  "timestamp": "2025-08-10T01:18:39.743971",
+  "hardware_counters": {
+    "ctypes": {
+      "timing": {
+        "total_time_ns": 857916,
+        "per_call_ns": 85.8,
+        "iterations": 10000
+      },
+      "hardware_counters": {
+        "cpu_atom/cycles/": 97114877.0,
+        "cpu_core/cycles/": 242643259.0,
+        "cpu_atom/instructions/": 115801919.0,
+        "cpu_core/instructions/": 451093869.0,
+        "cpu_atom/cache-references/": 1473800.0,
+        "cpu_core/cache-references/": 5335635.0,
+        "cpu_atom/cache-misses/": 739815.0,
+        "cpu_core/cache-misses/": 531612.0,
+        "cpu_atom/branches/": 25372898.0,
+        "cpu_core/branches/": 99042823.0,
+        "cpu_atom/branch-misses/": 892488.0,
+        "cpu_core/branch-misses/": 2329853.0,
+        "cpu_atom/L1-dcache-loads/": 29568103.0,
+        "cpu_core/L1-dcache-loads/": 118673822.0,
+        "cpu_core/L1-dcache-load-misses/": 3743602.0
+      },
+      "events_monitored": [
+        "cycles",
+        "instructions",
+        "cache-references",
+        "cache-misses",
+        "branches",
+        "branch-misses",
+        "L1-dcache-loads",
+        "L1-dcache-load-misses"
+      ]
+    },
+    "cffi": {
+      "timing": {
+        "total_time_ns": 1003678,
+        "per_call_ns": 100.4,
+        "iterations": 10000
+      },
+      "hardware_counters": {
+        "cpu_core/cycles/": 224121794.0,
+        "cpu_core/instructions/": 421230905.0,
+        "cpu_core/cache-references/": 4709997.0,
+        "cpu_core/cache-misses/": 511479.0,
+        "cpu_core/branches/": 92442939.0,
+        "cpu_core/branch-misses/": 2145355.0,
+        "cpu_core/L1-dcache-loads/": 110415042.0,
+        "cpu_core/L1-dcache-load-misses/": 3369510.0
+      },
+      "events_monitored": [
+        "cycles",
+        "instructions",
+        "cache-references",
+        "cache-misses",
+        "branches",
+        "branch-misses",
+        "L1-dcache-loads",
+        "L1-dcache-load-misses"
+      ]
+    },
+    "pybind11": {
+      "timing": {
+        "total_time_ns": 710571,
+        "per_call_ns": 71.1,
+        "iterations": 10000
+      },
+      "hardware_counters": {
+        "cpu_core/cycles/": 219377876.0,
+        "cpu_core/instructions/": 404710013.0,
+        "cpu_core/cache-references/": 4826200.0,
+        "cpu_core/cache-misses/": 462704.0,
+        "cpu_core/branches/": 88528163.0,
+        "cpu_core/branch-misses/": 2136547.0,
+        "cpu_core/L1-dcache-loads/": 106231282.0,
+        "cpu_core/L1-dcache-load-misses/": 3366823.0
+      },
+      "events_monitored": [
+        "cycles",
+        "instructions",
+        "cache-references",
+        "cache-misses",
+        "branches",
+        "branch-misses",
+        "L1-dcache-loads",
+        "L1-dcache-load-misses"
+      ]
+    },
+    "pyo3": {
+      "timing": {
+        "total_time_ns": 501030,
+        "per_call_ns": 50.1,
+        "iterations": 10000
+      },
+      "hardware_counters": {
+        "cpu_core/cycles/": 218864946.0,
+        "cpu_core/instructions/": 401670073.0,
+        "cpu_core/cache-references/": 4781406.0,
+        "cpu_core/cache-misses/": 476448.0,
+        "cpu_core/branches/": 87913071.0,
+        "cpu_core/branch-misses/": 2140699.0,
+        "cpu_core/L1-dcache-loads/": 105431536.0,
+        "cpu_core/L1-dcache-load-misses/": 3362243.0
+      },
+      "events_monitored": [
+        "cycles",
+        "instructions",
+        "cache-references",
+        "cache-misses",
+        "branches",
+        "branch-misses",
+        "L1-dcache-loads",
+        "L1-dcache-load-misses"
+      ]
+    }
+  },
+  "flame_graphs": {
+    "ctypes": "comprehensive_results_3.13.5-gil/ctypes_flamegraph_1754759923.svg",
+    "cffi": "comprehensive_results_3.13.5-gil/cffi_flamegraph_1754759929.svg",
+    "pybind11": "comprehensive_results_3.13.5-gil/pybind11_flamegraph_1754759934.svg",
+    "pyo3": "comprehensive_results_3.13.5-gil/pyo3_flamegraph_1754759939.svg"
+  }
+}

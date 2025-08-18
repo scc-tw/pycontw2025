@@ -1,0 +1,11 @@
+[project]
+name = "race"
+version = "0.1.0"
+description = "FFI Race Condition Tests"
+requires-python = ">=3.13"
+dependencies = [
+    "rich>=14.1.0",
+]
+
+[tool.setuptools]
+py-modules = []

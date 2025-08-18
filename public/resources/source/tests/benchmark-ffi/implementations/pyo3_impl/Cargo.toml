@@ -1,0 +1,27 @@
+[package]
+name = "benchlib_pyo3"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "benchlib_pyo3"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.25", features = ["extension-module"] }
+
+[build-dependencies]
+pyo3-build-config = "0.25"
+
+# Profile configurations for dual-mode builds
+[profile.release]
+opt-level = 3
+debug = "line-tables-only"    # minimal info for symbols/lines
+codegen-units = 1             # better optimization quality
+# lto = "thin"                # keep OFF for apples-to-apples comparison
+
+# Instrumented profile with additional debug info for profiling
+[profile.instrumented]
+inherits = "release"
+debug = "line-tables-only"
+# Force frame pointers via RUSTFLAGS in build system

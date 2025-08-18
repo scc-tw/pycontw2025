@@ -1,0 +1,16 @@
+[package]
+name = "glibc_arena_poc"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "glibc_arena_poc"
+crate-type = ["cdylib"]
+
+[dependencies]
+libc = "0.2"
+pyo3 = { version = "0.25", features = ["extension-module"] }
+
+[profile.release]
+lto = "thin"
+codegen-units = 1

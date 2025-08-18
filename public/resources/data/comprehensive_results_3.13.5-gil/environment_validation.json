@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "errors": [],
+  "warnings": [
+    "CPU frequency variance detected: 2370.6MHz. Consider locking frequencies for consistency.",
+    "NUMA detected - consider using 'numactl --physcpubind=0-7 --membind=0' for benchmarks"
+  ],
+  "timestamp": 1754759919.8172586
+}

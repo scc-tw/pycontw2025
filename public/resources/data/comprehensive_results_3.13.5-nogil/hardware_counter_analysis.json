@@ -1,0 +1,133 @@
+{
+  "timestamp": "2025-08-10T01:19:06.628532",
+  "hardware_counters": {
+    "ctypes": {
+      "timing": {
+        "total_time_ns": 1651901,
+        "per_call_ns": 165.2,
+        "iterations": 10000
+      },
+      "hardware_counters": {
+        "cpu_core/cycles/": 299841230.0,
+        "cpu_core/instructions/": 631053863.0,
+        "cpu_core/cache-references/": 8651975.0,
+        "cpu_core/cache-misses/": 668398.0,
+        "cpu_core/branches/": 140291001.0,
+        "cpu_core/branch-misses/": 2360476.0,
+        "cpu_core/L1-dcache-loads/": 171312067.0,
+        "cpu_core/L1-dcache-load-misses/": 4247304.0
+      },
+      "events_monitored": [
+        "cycles",
+        "instructions",
+        "cache-references",
+        "cache-misses",
+        "branches",
+        "branch-misses",
+        "L1-dcache-loads",
+        "L1-dcache-load-misses"
+      ]
+    },
+    "cffi": {
+      "timing": {
+        "total_time_ns": 2102088,
+        "per_call_ns": 210.2,
+        "iterations": 10000
+      },
+      "hardware_counters": {
+        "cpu_atom/cycles/": 123421869.0,
+        "cpu_core/cycles/": 308602721.0,
+        "cpu_atom/instructions/": 135335192.0,
+        "cpu_core/instructions/": 658903852.0,
+        "cpu_atom/cache-references/": 3058522.0,
+        "cpu_core/cache-references/": 8944742.0,
+        "cpu_atom/cache-misses/": 1736637.0,
+        "cpu_core/cache-misses/": 597189.0,
+        "cpu_atom/branches/": 28924733.0,
+        "cpu_core/branches/": 146074351.0,
+        "cpu_atom/branch-misses/": 699054.0,
+        "cpu_core/branch-misses/": 2439297.0,
+        "cpu_atom/L1-dcache-loads/": 34592666.0,
+        "cpu_core/L1-dcache-loads/": 179675770.0,
+        "cpu_core/L1-dcache-load-misses/": 4369536.0
+      },
+      "events_monitored": [
+        "cycles",
+        "instructions",
+        "cache-references",
+        "cache-misses",
+        "branches",
+        "branch-misses",
+        "L1-dcache-loads",
+        "L1-dcache-load-misses"
+      ]
+    },
+    "pybind11": {
+      "timing": {
+        "total_time_ns": 1394700,
+        "per_call_ns": 139.5,
+        "iterations": 10000
+      },
+      "hardware_counters": {
+        "cpu_core/cycles/": 296958855.0,
+        "cpu_core/instructions/": 627993541.0,
+        "cpu_core/cache-references/": 8607740.0,
+        "cpu_core/cache-misses/": 634331.0,
+        "cpu_core/branches/": 139337631.0,
+        "cpu_core/branch-misses/": 2361380.0,
+        "cpu_core/L1-dcache-loads/": 170319291.0,
+        "cpu_core/L1-dcache-load-misses/": 4246020.0
+      },
+      "events_monitored": [
+        "cycles",
+        "instructions",
+        "cache-references",
+        "cache-misses",
+        "branches",
+        "branch-misses",
+        "L1-dcache-loads",
+        "L1-dcache-load-misses"
+      ]
+    },
+    "pyo3": {
+      "timing": {
+        "total_time_ns": 1234154,
+        "per_call_ns": 123.4,
+        "iterations": 10000
+      },
+      "hardware_counters": {
+        "cpu_atom/cycles/": 121832582.0,
+        "cpu_core/cycles/": 306778473.0,
+        "cpu_atom/instructions/": 135560223.0,
+        "cpu_core/instructions/": 647109293.0,
+        "cpu_atom/cache-references/": 2882870.0,
+        "cpu_core/cache-references/": 8964299.0,
+        "cpu_atom/cache-misses/": 1688106.0,
+        "cpu_core/cache-misses/": 644171.0,
+        "cpu_atom/branches/": 29366393.0,
+        "cpu_core/branches/": 143714605.0,
+        "cpu_atom/branch-misses/": 743349.0,
+        "cpu_core/branch-misses/": 2441381.0,
+        "cpu_atom/L1-dcache-loads/": 34510898.0,
+        "cpu_core/L1-dcache-loads/": 175723829.0,
+        "cpu_core/L1-dcache-load-misses/": 4381806.0
+      },
+      "events_monitored": [
+        "cycles",
+        "instructions",
+        "cache-references",
+        "cache-misses",
+        "branches",
+        "branch-misses",
+        "L1-dcache-loads",
+        "L1-dcache-load-misses"
+      ]
+    }
+  },
+  "flame_graphs": {
+    "ctypes": "comprehensive_results_3.13.5-nogil/ctypes_flamegraph_1754759950.svg",
+    "cffi": "comprehensive_results_3.13.5-nogil/cffi_flamegraph_1754759956.svg",
+    "pybind11": "comprehensive_results_3.13.5-nogil/pybind11_flamegraph_1754759961.svg",
+    "pyo3": "comprehensive_results_3.13.5-nogil/pyo3_flamegraph_1754759967.svg"
+  }
+}

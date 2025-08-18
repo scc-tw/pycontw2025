@@ -1,0 +1,164 @@
+# FFI Benchmark Suite .gitignore
+
+# Build artifacts and compiled libraries
+*.so
+*.dll
+*.dylib
+*.a
+*.o
+*.obj
+*.lib
+*.exp
+*.pdb
+benchlib.so
+benchlib.dll
+benchlib.dylib
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Benchmark results and profiling data
+results/
+execution_results/
+hypothesis_results/
+profiling_results/
+*.perf.data
+*.perf.data.old
+*.svg
+*.json
+*.txt
+*.log
+*.out
+
+# Flame graph artifacts
+*.collapsed
+*.folded
+perf.data*
+flamegraph*.svg
+cpu_profile*.svg
+
+# VizTracer output
+*.viztracer.json
+trace_*.json
+timing_trace_*.json
+
+# Statistical analysis artifacts
+statistical_results/
+*.csv
+*.xlsx
+bootstrap_*.json
+mann_whitney_*.json
+
+# Memory profiling artifacts
+valgrind_*.txt
+*.massif
+*.callgrind
+arena_analysis_*.txt
+memory_trace_*.json
+
+# Performance counter data
+perf_events_*.txt
+cache_analysis_*.txt
+hardware_counters_*.json
+
+# Crossover analysis results
+crossover_*.json
+crossover_*.png
+crossover_*.pdf
+matrix_analysis_*.json
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+.cache/
+
+# Build system artifacts
+build/
+dist/
+*.egg-info/
+target/
+Cargo.lock
+
+# PyO3/Rust specific
+benchmarks/target/
+benchmarks/Cargo.lock
+*.whl
+
+# pybind11 build artifacts
+benchmarks/*.so
+benchmarks/build/
+
+# Test and validation artifacts
+validation_report.txt
+test_results_*.json
+benchmark_validation_*.txt
+
+# System profiling artifacts
+system_baseline.txt
+cpu_saturation.txt
+memory_baseline.txt
+
+# Auto-generated documentation
+docs/generated/
+*.html
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Keep important files (negate ignore patterns)
+!benchlib.c
+!*.py
+!*.md
+!Makefile
+!*.toml
+!*.rs
+!*.cpp
+!*.hpp
+!build.rs
+!README.md
+!ENVIRONMENT_SETUP.md
+
+# Keep example configuration files
+!example_*.json
+!sample_*.txt
+!template_*.md
+
+# Keep documentation and specifications
+!docs/
+!*.md
+
+# Gregg's FrameGraph
+FrameGraph/

@@ -1,0 +1,24 @@
+# handcrafted_ffi/Cargo.toml
+# Pure manual FFI implementation without PyO3 dependencies
+[package]
+name = "handcrafted_ffi"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "handcrafted_ffi"
+crate-type = ["cdylib"]
+
+[dependencies]
+libc = "0.2"
+tokio = { version = "1.0", features = ["full"], optional = true }
+python3-sys = "0.7"
+
+[features]
+default = []
+async_support = ["tokio"]
+
+[build-dependencies]
+bindgen = "0.69"
+
+# Explicitly NO PyO3 dependency - pure manual FFI

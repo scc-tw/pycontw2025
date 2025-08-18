@@ -1,0 +1,106 @@
+# Virtual Environment Configuration for FFI Benchmarking
+# This file defines the isolated environment strategy for reproducible benchmarks
+
+strategy: isolated
+version: 1.0
+
+# Python builds configuration
+python_builds:
+  - name: "3.13.5-gil"
+    path: "../../cpython3.13.5-gil/bin/python3.13"
+    description: "Python 3.13.5 with GIL enabled"
+    
+  - name: "3.13.5-nogil"
+    path: "../../cpython3.13.5-nogil/bin/python3.13"
+    description: "Python 3.13.5 with GIL disabled"
+    
+  - name: "3.14.0rc1-gil"
+    path: "../../cpython3.14.0rc1-gil/bin/python3.14"
+    description: "Python 3.14.0rc1 with GIL enabled"
+    
+  - name: "3.14.0rc1-nogil"
+    path: "../../cpython3.14.0rc1-nogil/bin/python3.14"
+    description: "Python 3.14.0rc1 with GIL disabled"
+
+# Dependency groups
+dependencies:
+  core:
+    - numpy
+    - scipy
+    - matplotlib
+    - psutil
+    
+  ffi:
+    - cffi
+    - pybind11
+    
+  # Pre-release packages requiring --pre flag
+  prerelease:
+    - cffi>=2.0.0b1
+    
+  profiling:
+    - viztracer
+    - memory-profiler
+    - py-spy
+    - line-profiler
+    
+  rust:
+    - maturin
+    - setuptools-rust
+    
+  development:
+    - pytest
+    - pytest-benchmark
+    - black
+    - ruff
+    - mypy
+    
+  optional:
+    - pandas
+    - seaborn
+    - jupyterlab
+
+# Environment isolation settings
+isolation:
+  # Each Python build gets its own venv
+  separate_venvs: true
+  
+  # Use latest package versions
+  upgrade_packages: true
+  
+  # Generate locked requirements files
+  lock_dependencies: true
+  
+  # Verify installations
+  verify_imports: true
+  
+  # Clean previous environments
+  clean_on_setup: true
+
+# Benchmark execution settings
+execution:
+  # Use isolated venv for each benchmark run
+  use_venv: true
+  
+  # Set PYTHONPATH to empty to avoid system interference
+  clear_pythonpath: true
+  
+  # Disable user site packages
+  no_user_site: true
+  
+  # Set consistent random seed
+  random_seed: 42
+
+# Verification tests
+verification:
+  required_imports:
+    - numpy
+    - scipy
+    - cffi
+    - pybind11
+    
+  version_checks:
+    numpy: ">=2.0.0"
+    scipy: ">=1.14.0"
+    cffi: ">=2.0.0b1"
+    pybind11: ">=3.0.0"

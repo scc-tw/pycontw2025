@@ -1,0 +1,725 @@
+{
+  "essential_data": [
+    "CPU on-CPU profile: top symbols and percent",
+    "Module/DSO breakdown (libpython, libffi, libc, kernel, your .so)",
+    "User vs Kernel time share (approx via DSO classification)",
+    "Syscall presence in on-CPU stacks",
+    "Lock contention indicators (futex, pthread_mutex, spin/rw locks)",
+    "Python runtime indicators (Py*/_Py*, vectorcall, refcount/atomic paths)",
+    "FFI/lib boundaries (benchlib.so, libffi, pybind11, pyo3)",
+    "Top call stacks (collapsed) for hotspot context"
+  ],
+  "files": [
+    {
+      "file": "tests/benchmark-ffi/comprehensive_results_3.13.5-gil/ctypes_profile_1754689020.perf.data",
+      "total_overhead_percent": 200.01000000000002,
+      "user_percent": 152.97000000000003,
+      "kernel_percent": 47.04,
+      "top_dsos": [
+        [
+          "python3.13",
+          112.39000000000001
+        ],
+        [
+          "[kernel.kallsyms]",
+          47.04
+        ],
+        [
+          "libc.so.6",
+          19.36
+        ],
+        [
+          "_ctypes.cpython-313-x86_64-linux-gnu.so",
+          13.02
+        ],
+        [
+          "[vdso]",
+          4.33
+        ],
+        [
+          "libffi.so.8.2.0",
+          3.68
+        ],
+        [
+          "benchlib.so",
+          0.13
+        ],
+        [
+          "ld-linux-x86-64.so.2",
+          0.06
+        ]
+      ],
+      "top_symbols": [
+        {
+          "percent": 21.57,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 13.2,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 12.95,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 12.33,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 11.53,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 11.04,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 10.5,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 9.87,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 9.68,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 8.34,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 7.42,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 5.6,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 4.36,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 4.33,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 4.19,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 3.61,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 2.73,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 2.6,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 2.57,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 2.24,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 1.79,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 1.66,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 1.66,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 1.66,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 1.43,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 1.4,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 1.37,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 1.11,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 1.01,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 0.91,
+          "dso": "",
+          "symbol": "-"
+        }
+      ],
+      "lock_percent": 0.0,
+      "syscall_percent": 0.0,
+      "python_percent": 0.0,
+      "ffi_percent": 0.0,
+      "top_stacks": [
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;55555575fb24 _PyEval_EvalFrameDefault+0x1134;5555556fa9af PyObject_Vectorcall+0x2f;5555556fa9af _PyObject_VectorcallTstate+0x2f;555555725504 cfunction_vectorcall_NOARGS+0x54;5555558427c9 time_time+0x19;555555819f8f PyTime_Time+0xf;555555819fca py_get_system_clock+0x2a;7ffff7ce3b6c clock_gettime+0x1c;7ffff7fc0be8 __vdso_clock_gettime+0x58",
+          97
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;55555575fb24 _PyEval_EvalFrameDefault+0x1134;5555556fa82a _PyObject_MakeTpCall+0x6a;7ffff75be8ea PyCFuncPtr_call+0x13a;7ffff75b8ad6 _ctypes_callproc+0x86a;7ffff75b8ad6 _call_function_pointer+0x86a;55555577f8c1 _PyThreadState_Attach+0x21;55555577925d take_gil+0xcd;55555577925d _Py_unset_eval_breaker_bit+0xcd;55555577925d _Py_atomic_and_uintptr+0xcd",
+          30
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dfd _PyEval_EvalFrameDefault+0x540d",
+          22
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c721 PyDict_GetItemRef+0x21",
+          21
+        ],
+        [
+          "55555571c77b PyDict_GetItemRef+0x7b",
+          21
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c74a PyDict_GetItemRef+0x4a;55555571c74a _PyDict_GetItemRef_KnownHash+0x4a;5555557195dc _Py_dict_lookup+0x2cc",
+          21
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c75f PyDict_GetItemRef+0x5f;55555571c75f _PyDict_GetItemRef_KnownHash+0x5f",
+          20
+        ],
+        [
+          "5555557194e6 _Py_dict_lookup+0x1d6",
+          19
+        ],
+        [
+          "555555719318 _Py_dict_lookup+0x8",
+          19
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c78e PyDict_GetItemRef+0x8e;55555571c78e _PyDict_GetItemRef_KnownHash+0x8e",
+          18
+        ],
+        [
+          "5555557194e8 _Py_dict_lookup+0x1d8",
+          17
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dd9 _PyEval_EvalFrameDefault+0x53e9",
+          17
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;55555575fb24 _PyEval_EvalFrameDefault+0x1134;5555556fa82a _PyObject_MakeTpCall+0x6a;7ffff75be8ea PyCFuncPtr_call+0x13a;7ffff75bfec1 _ctypes_callproc+0x3f1;7ffff75bfec1 GetResult+0x3f1;7ffff75c0812 _ctypes_get_fielddesc+0x1b2",
+          17
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;55555575fb24 _PyEval_EvalFrameDefault+0x1134;5555556fa9af PyObject_Vectorcall+0x2f;5555556fa9af _PyObject_VectorcallTstate+0x2f;555555725504 cfunction_vectorcall_NOARGS+0x54;5555558427da time_time+0x2a;5555558427da _PyFloat_FromPyTime+0x2a;555555819e35 PyTime_AsSecondsDouble+0x35",
+          17
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763df8 _PyEval_EvalFrameDefault+0x5408",
+          16
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;55555575fb24 _PyEval_EvalFrameDefault+0x1134;5555556fa82a _PyObject_MakeTpCall+0x6a;7ffff75be8ea PyCFuncPtr_call+0x13a;7ffff75b8ad6 _ctypes_callproc+0x86a;7ffff75b8ad6 _call_function_pointer+0x86a;55555577f8c1 _PyThreadState_Attach+0x21;55555577928e take_gil+0xfe;55555577928e update_eval_breaker_for_thread+0xfe;55555577928e copy_eval_breaker_bits+0xfe;55555577928e _Py_atomic_load_uintptr_relaxed+0xfe",
+          16
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c74a PyDict_GetItemRef+0x4a;55555571c74a _PyDict_GetItemRef_KnownHash+0x4a;5555557195c3 _Py_dict_lookup+0x2b3;5555557195c3 DK_UNICODE_ENTRIES+0x2b3;5555557195c3 _DK_ENTRIES+0x2b3",
+          15
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;55555575fb7b _PyEval_EvalFrameDefault+0x118b",
+          15
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;55555575fb24 _PyEval_EvalFrameDefault+0x1134;5555556fa82a _PyObject_MakeTpCall+0x6a;7ffff75be8ea PyCFuncPtr_call+0x13a;7ffff75bfe73 _ctypes_callproc+0x3a3;7ffff75bfe73 GetResult+0x3a3;7ffff75bfe73 PyStgInfo_FromType+0x3a3;7ffff75bfe73 _stginfo_from_type+0x3a3",
+          15
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c74a PyDict_GetItemRef+0x4a;55555571c74a _PyDict_GetItemRef_KnownHash+0x4a;55555571936f _Py_dict_lookup+0x5f;55555571936f unicodekeys_lookup_unicode+0x5f;55555571936f do_lookup+0x5f;55555571936f _DK_ENTRIES+0x5f",
+          14
+        ],
+        [
+          "7ffff7c9b9f3 [unknown]",
+          13
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c74a PyDict_GetItemRef+0x4a;55555571c74a _PyDict_GetItemRef_KnownHash+0x4a;555555719353 _Py_dict_lookup+0x43;555555719353 unicodekeys_lookup_unicode+0x43;555555719353 do_lookup+0x43;555555719353 _DK_ENTRIES+0x43",
+          13
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c74a PyDict_GetItemRef+0x4a;55555571c74a _PyDict_GetItemRef_KnownHash+0x4a;55555571932a _Py_dict_lookup+0x1a",
+          13
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c709 PyDict_GetItemRef+0x9",
+          13
+        ],
+        [
+          "555555763dbd _PyEval_EvalFrameDefault+0x53cd",
+          13
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dec _PyEval_EvalFrameDefault+0x53fc",
+          13
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;55555575fb24 _PyEval_EvalFrameDefault+0x1134;5555556fa9af PyObject_Vectorcall+0x2f;5555556fa9af _PyObject_VectorcallTstate+0x2f;555555725504 cfunction_vectorcall_NOARGS+0x54;5555558427da time_time+0x2a;5555558427da _PyFloat_FromPyTime+0x2a;555555819e27 PyTime_AsSecondsDouble+0x27",
+          13
+        ],
+        [
+          "5555557194df _Py_dict_lookup+0x1cf",
+          13
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c74a PyDict_GetItemRef+0x4a;55555571c74a _PyDict_GetItemRef_KnownHash+0x4a;555555719399 _Py_dict_lookup+0x89;555555719399 unicodekeys_lookup_unicode+0x89;555555719399 do_lookup+0x89;555555719399 compare_unicode_unicode+0x89",
+          13
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c74a PyDict_GetItemRef+0x4a;55555571c74a _PyDict_GetItemRef_KnownHash+0x4a;555555719341 _Py_dict_lookup+0x31;555555719341 unicodekeys_lookup_unicode+0x31;555555719341 do_lookup+0x31;555555719341 _DK_ENTRIES+0x31",
+          13
+        ]
+      ]
+    },
+    {
+      "file": "tests/benchmark-ffi/comprehensive_results_3.13.5-gil/ctypes_profile_1754759923.perf.data",
+      "total_overhead_percent": 100.0,
+      "user_percent": 99.85,
+      "kernel_percent": 0.15,
+      "top_dsos": [
+        [
+          "python3.13",
+          74.65
+        ],
+        [
+          "_ctypes.cpython-313-x86_64-linux-gnu.so",
+          12.07
+        ],
+        [
+          "libffi.so.8.2.0",
+          6.64
+        ],
+        [
+          "[vdso]",
+          5.99
+        ],
+        [
+          "libc.so.6",
+          0.44
+        ],
+        [
+          "[kernel.kallsyms]",
+          0.15
+        ],
+        [
+          "benchlib.so",
+          0.03
+        ],
+        [
+          "libstdc++.so.6.0.34",
+          0.03
+        ]
+      ],
+      "top_symbols": [
+        {
+          "percent": 23.94,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 11.97,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 6.12,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 5.99,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 4.86,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 3.76,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 3.16,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 2.89,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 2.6,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 2.17,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 2.01,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 1.87,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 1.61,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 1.58,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 1.58,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 1.51,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 1.45,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 1.05,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 1.02,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 0.99,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 0.86,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 0.79,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 0.72,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 0.66,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 0.62,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 0.59,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 0.59,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 0.56,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 0.49,
+          "dso": "",
+          "symbol": "-"
+        },
+        {
+          "percent": 0.46,
+          "dso": "",
+          "symbol": "-"
+        }
+      ],
+      "lock_percent": 0.0,
+      "syscall_percent": 0.0,
+      "python_percent": 0.0,
+      "ffi_percent": 0.0,
+      "top_stacks": [
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;55555575fb24 _PyEval_EvalFrameDefault+0x1134;5555556fa9af PyObject_Vectorcall+0x2f;5555556fa9af _PyObject_VectorcallTstate+0x2f;555555725504 cfunction_vectorcall_NOARGS+0x54;5555558427c9 time_time+0x19;555555819f8f PyTime_Time+0xf;555555819fca py_get_system_clock+0x2a;7ffff7ce3b6c clock_gettime+0x1c;7ffff7fc0be8 __vdso_clock_gettime+0x58",
+          110
+        ],
+        [
+          "5555557194e6 _Py_dict_lookup+0x1d6",
+          30
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c74a PyDict_GetItemRef+0x4a;55555571c74a _PyDict_GetItemRef_KnownHash+0x4a;555555719353 _Py_dict_lookup+0x43;555555719353 unicodekeys_lookup_unicode+0x43;555555719353 do_lookup+0x43;555555719353 _DK_ENTRIES+0x43",
+          28
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;55555575fb24 _PyEval_EvalFrameDefault+0x1134;5555556fa9af PyObject_Vectorcall+0x2f;5555556fa9af _PyObject_VectorcallTstate+0x2f;555555725504 cfunction_vectorcall_NOARGS+0x54;5555558427da time_time+0x2a;5555558427da _PyFloat_FromPyTime+0x2a;555555819e27 PyTime_AsSecondsDouble+0x27",
+          25
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c737 PyDict_GetItemRef+0x37;55555571c737 _PyObject_HashFast+0x37",
+          24
+        ],
+        [
+          "555555719318 _Py_dict_lookup+0x8",
+          22
+        ],
+        [
+          "555555763dbd _PyEval_EvalFrameDefault+0x53cd",
+          22
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c721 PyDict_GetItemRef+0x21",
+          20
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;55555575fb24 _PyEval_EvalFrameDefault+0x1134;5555556fa82a _PyObject_MakeTpCall+0x6a;7ffff75be8ea PyCFuncPtr_call+0x13a;7ffff75bfec1 _ctypes_callproc+0x3f1;7ffff75bfec1 GetResult+0x3f1;7ffff75c0812 _ctypes_get_fielddesc+0x1b2",
+          20
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763d99 _PyEval_EvalFrameDefault+0x53a9",
+          20
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dad _PyEval_EvalFrameDefault+0x53bd",
+          20
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;55555575fb7b _PyEval_EvalFrameDefault+0x118b",
+          19
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;5555556eef6d PyMapping_GetOptionalItem+0xd",
+          19
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c74a PyDict_GetItemRef+0x4a;55555571c74a _PyDict_GetItemRef_KnownHash+0x4a;5555557195c3 _Py_dict_lookup+0x2b3;5555557195c3 DK_UNICODE_ENTRIES+0x2b3;5555557195c3 _DK_ENTRIES+0x2b3",
+          19
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dfd _PyEval_EvalFrameDefault+0x540d",
+          18
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c74a PyDict_GetItemRef+0x4a;55555571c74a _PyDict_GetItemRef_KnownHash+0x4a;55555571936f _Py_dict_lookup+0x5f;55555571936f unicodekeys_lookup_unicode+0x5f;55555571936f do_lookup+0x5f;55555571936f _DK_ENTRIES+0x5f",
+          17
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c709 PyDict_GetItemRef+0x9",
+          16
+        ],
+        [
+          "5555557194df _Py_dict_lookup+0x1cf",
+          16
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c74a PyDict_GetItemRef+0x4a;55555571c74a _PyDict_GetItemRef_KnownHash+0x4a;555555719399 _Py_dict_lookup+0x89;555555719399 unicodekeys_lookup_unicode+0x89;555555719399 do_lookup+0x89;555555719399 compare_unicode_unicode+0x89",
+          16
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763df8 _PyEval_EvalFrameDefault+0x5408",
+          16
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c74a PyDict_GetItemRef+0x4a;55555571c74a _PyDict_GetItemRef_KnownHash+0x4a;55555571935b _Py_dict_lookup+0x4b;55555571935b unicodekeys_lookup_unicode+0x4b;55555571935b do_lookup+0x4b",
+          15
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c789 PyDict_GetItemRef+0x89;55555571c789 _PyDict_GetItemRef_KnownHash+0x89",
+          15
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dec _PyEval_EvalFrameDefault+0x53fc",
+          15
+        ],
+        [
+          "32ffffffff [unknown];55555571c774 PyDict_GetItemRef+0x74",
+          15
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c78e PyDict_GetItemRef+0x8e;55555571c78e _PyDict_GetItemRef_KnownHash+0x8e",
+          14
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;55555575fb24 _PyEval_EvalFrameDefault+0x1134;5555556fa9af PyObject_Vectorcall+0x2f;5555556fa9af _PyObject_VectorcallTstate+0x2f;555555725504 cfunction_vectorcall_NOARGS+0x54;5555558427da time_time+0x2a;5555558427da _PyFloat_FromPyTime+0x2a;555555819e0a PyTime_AsSecondsDouble+0xa",
+          14
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;555555763dc1 _PyEval_EvalFrameDefault+0x53d1;55555571c74a PyDict_GetItemRef+0x4a;55555571c74a _PyDict_GetItemRef_KnownHash+0x4a;55555571932a _Py_dict_lookup+0x1a",
+          14
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;55555575fb24 _PyEval_EvalFrameDefault+0x1134;5555556fa82a _PyObject_MakeTpCall+0x6a;7ffff75be804 PyCFuncPtr_call+0x54;7ffff75be804 PyStgInfo_FromObject+0x54;7ffff75be804 _stginfo_from_type+0x54;5555556f141d object_isinstance+0x3d;5555556f141d PyObject_TypeCheck+0x3d;5555557354b5 PyType_IsSubtype+0x85;5555557354b5 is_subtype_with_mro+0x85",
+          14
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;55555575fac3 _PyEval_EvalFrameDefault+0x10d3",
+          13
+        ],
+        [
+          "5555557987e4 _start+0x24;7ffff7c27728 __libc_start_main+0x88;7ffff7c27674 [unknown];5555558225f4 Py_BytesMain+0x34;555555822b1c Py_RunMain+0x3bc;555555822b1c pymain_run_python+0x3bc;555555822b1c pymain_run_file+0x3bc;555555822b1c pymain_run_file_obj+0x3bc;555555819503 _PyRun_AnyFileObject+0x43;5555558196e0 _PyRun_SimpleFileObject+0x1c0;5555558198b4 pyrun_file+0x84;55555581997f run_mod+0x7f;555555819dbe run_eval_code_obj+0x5e;5555557fb65a PyEval_EvalCode+0x9a;55555575fb24 _PyEval_EvalFrameDefault+0x1134;5555556fa9af PyObject_Vectorcall+0x2f;5555556fa9af _PyObject_VectorcallTstate+0x2f;555555725504 cfunction_vectorcall_NOARGS+0x54;5555558427da time_time+0x2a;5555558427da _PyFloat_FromPyTime+0x2a;555555819e35 PyTime_AsSecondsDouble+0x35",
+          13
+        ]
+      ]
+    }
+  ],
+  "pairs": [
+    {
+      "gil": "tests/benchmark-ffi/comprehensive_results_3.13.5-gil/ctypes_profile_1754689020.perf.data",
+      "nogil": "tests/benchmark-ffi/comprehensive_results_3.13.5-gil/ctypes_profile_1754759923.perf.data",
+      "diff": {
+        "files": {
+          "gil": "tests/benchmark-ffi/comprehensive_results_3.13.5-gil/ctypes_profile_1754689020.perf.data",
+          "nogil": "tests/benchmark-ffi/comprehensive_results_3.13.5-gil/ctypes_profile_1754759923.perf.data"
+        },
+        "user_percent_delta": -53.12,
+        "kernel_percent_delta": -46.89,
+        "lock_percent_delta": 0.0,
+        "syscall_percent_delta": 0.0,
+        "python_percent_delta": 0.0,
+        "ffi_percent_delta": 0.0,
+        "top_dso_deltas": [
+          {
+            "dso": "libffi.so.8.2.0",
+            "gil": 3.68,
+            "nogil": 6.64,
+            "delta": 2.96
+          },
+          {
+            "dso": "[vdso]",
+            "gil": 4.33,
+            "nogil": 5.99,
+            "delta": 1.66
+          },
+          {
+            "dso": "libstdc++.so.6.0.34",
+            "gil": 0.0,
+            "nogil": 0.03,
+            "delta": 0.03
+          },
+          {
+            "dso": "ld-linux-x86-64.so.2",
+            "gil": 0.06,
+            "nogil": 0.0,
+            "delta": -0.06
+          },
+          {
+            "dso": "benchlib.so",
+            "gil": 0.13,
+            "nogil": 0.03,
+            "delta": -0.1
+          },
+          {
+            "dso": "_ctypes.cpython-313-x86_64-linux-gnu.so",
+            "gil": 13.02,
+            "nogil": 12.07,
+            "delta": -0.95
+          },
+          {
+            "dso": "libc.so.6",
+            "gil": 19.36,
+            "nogil": 0.44,
+            "delta": -18.92
+          },
+          {
+            "dso": "python3.13",
+            "gil": 112.39,
+            "nogil": 74.65,
+            "delta": -37.74
+          },
+          {
+            "dso": "[kernel.kallsyms]",
+            "gil": 47.04,
+            "nogil": 0.15,
+            "delta": -46.89
+          }
+        ],
+        "notes": []
+      }
+    }
+  ]
+}

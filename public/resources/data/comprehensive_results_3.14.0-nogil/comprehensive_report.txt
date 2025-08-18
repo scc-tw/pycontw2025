@@ -1,0 +1,46 @@
+🔬 COMPREHENSIVE FFI BENCHMARK REPORT - PYCON TAIWAN 2025
+======================================================================
+Generated: 2025-08-10T01:20:00.100570
+Methodology: comprehensive_ffi_benchmark_academic_rigor
+Python: 3.14.0 (No-GIL)
+Platform: Linux-6.15.9-arch1-1-x86_64-with-glibc2.42
+
+✅ ENVIRONMENT VALIDATION: PASSED
+
+🏆 FFI METHOD PERFORMANCE RANKING (Hot Path)
+--------------------------------------------------
+🥇 1. pyo3        :     80.0 ns (1.00x)
+🥈 2. pybind11    :    107.0 ns (1.34x)
+🥉 3. ctypes      :    124.0 ns (1.55x)
+   4. cffi        :    195.0 ns (2.44x)
+
+📊 STATISTICAL ANALYSIS SUMMARY
+----------------------------------------
+Pairwise comparisons: 6
+Statistically significant: 6
+Corrected alpha: 0.050000
+
+🔧 HARDWARE COUNTER ANALYSIS
+-----------------------------------
+Implementations analyzed: 4
+🔥 FLAME GRAPHS GENERATED:
+   • ctypes: ctypes_flamegraph_1754760004.svg
+   • cffi: cffi_flamegraph_1754760009.svg
+   • pybind11: pybind11_flamegraph_1754760015.svg
+
+🎯 KEY FINDINGS
+--------------------
+   • pyo3 is fastest (80.0ns), 2.4x faster than cffi
+   • 6/6 pairwise comparisons show statistically significant differences
+   • PLT cache effects: cffi shows 834.9x first-call penalty, ctypes shows 70.2x
+   • Hardware performance counters collected for 4 implementations
+
+💡 RECOMMENDATIONS
+-------------------------
+   • Use pyo3 for optimal single-call performance
+   • Consider PLT cache effects for applications with mixed call patterns
+   • Statistical analysis confirms performance differences are not due to measurement noise
+   • Run comprehensive validation before production benchmarking
+
+⏱️  Total execution time: 24.9 seconds
+💾 Results directory: comprehensive_results_3.14.0-nogil

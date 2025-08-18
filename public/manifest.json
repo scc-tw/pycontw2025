@@ -1,38 +1,732 @@
 {
-  "generated": "2025-08-18T07:44:10.589Z",
+  "generated": "2025-08-18T08:27:42.284Z",
   "basePath": "/resources",
-  "totalFiles": 2,
+  "totalFiles": 260,
   "files": [
-    "data/results/2025/january/performance_metrics.csv",
-    "source/benchmarks/cpu/test_performance.py"
+    "data/Py03-gil-nogil-diff-flamegraph/pyo3_diff_flame.svg",
+    "data/Py03-gil-nogil-diff-flamegraph/pyo3_gil_flame.svg",
+    "data/Py03-gil-nogil-diff-flamegraph/pyo3_nogil_flame.svg",
+    "data/comprehensive_results_3.13.5-gil/a.json",
+    "data/comprehensive_results_3.13.5-gil/cffi_flamegraph_1754689027.svg",
+    "data/comprehensive_results_3.13.5-gil/cffi_flamegraph_1754759929.svg",
+    "data/comprehensive_results_3.13.5-gil/cffi_profile_1754689027.perf.data",
+    "data/comprehensive_results_3.13.5-gil/cffi_profile_1754759929.perf.data",
+    "data/comprehensive_results_3.13.5-gil/comprehensive_report.txt",
+    "data/comprehensive_results_3.13.5-gil/comprehensive_results.json",
+    "data/comprehensive_results_3.13.5-gil/crossover_analysis_data.json",
+    "data/comprehensive_results_3.13.5-gil/ctypes_flamegraph_1754689020.svg",
+    "data/comprehensive_results_3.13.5-gil/ctypes_flamegraph_1754758902.svg",
+    "data/comprehensive_results_3.13.5-gil/ctypes_flamegraph_1754759923.svg",
+    "data/comprehensive_results_3.13.5-gil/ctypes_profile_1754689020.perf.data",
+    "data/comprehensive_results_3.13.5-gil/ctypes_profile_1754758902.perf.data",
+    "data/comprehensive_results_3.13.5-gil/ctypes_profile_1754759923.perf.data",
+    "data/comprehensive_results_3.13.5-gil/environment_validation.json",
+    "data/comprehensive_results_3.13.5-gil/hardware_counter_analysis.json",
+    "data/comprehensive_results_3.13.5-gil/plt_aware_benchmark_data.json",
+    "data/comprehensive_results_3.13.5-gil/pybind11_flamegraph_1754689033.svg",
+    "data/comprehensive_results_3.13.5-gil/pybind11_flamegraph_1754759934.svg",
+    "data/comprehensive_results_3.13.5-gil/pybind11_profile_1754689033.perf.data",
+    "data/comprehensive_results_3.13.5-gil/pybind11_profile_1754759934.perf.data",
+    "data/comprehensive_results_3.13.5-gil/pyo3_flamegraph_1754689040.svg",
+    "data/comprehensive_results_3.13.5-gil/pyo3_flamegraph_1754759939.svg",
+    "data/comprehensive_results_3.13.5-gil/pyo3_profile_1754689040.perf.data",
+    "data/comprehensive_results_3.13.5-gil/pyo3_profile_1754759939.perf.data",
+    "data/comprehensive_results_3.13.5-gil/python_matrix_analysis.json",
+    "data/comprehensive_results_3.13.5-gil/statistical_analysis_results.json",
+    "data/comprehensive_results_3.13.5-nogil/cffi_flamegraph_1754689060.svg",
+    "data/comprehensive_results_3.13.5-nogil/cffi_flamegraph_1754759956.svg",
+    "data/comprehensive_results_3.13.5-nogil/cffi_profile_1754689060.perf.data",
+    "data/comprehensive_results_3.13.5-nogil/cffi_profile_1754759956.perf.data",
+    "data/comprehensive_results_3.13.5-nogil/comprehensive_report.txt",
+    "data/comprehensive_results_3.13.5-nogil/comprehensive_results.json",
+    "data/comprehensive_results_3.13.5-nogil/crossover_analysis_data.json",
+    "data/comprehensive_results_3.13.5-nogil/ctypes_flamegraph_1754689053.svg",
+    "data/comprehensive_results_3.13.5-nogil/ctypes_flamegraph_1754758909.svg",
+    "data/comprehensive_results_3.13.5-nogil/ctypes_flamegraph_1754759950.svg",
+    "data/comprehensive_results_3.13.5-nogil/ctypes_profile_1754689053.perf.data",
+    "data/comprehensive_results_3.13.5-nogil/ctypes_profile_1754758909.perf.data",
+    "data/comprehensive_results_3.13.5-nogil/ctypes_profile_1754759950.perf.data",
+    "data/comprehensive_results_3.13.5-nogil/environment_validation.json",
+    "data/comprehensive_results_3.13.5-nogil/hardware_counter_analysis.json",
+    "data/comprehensive_results_3.13.5-nogil/plt_aware_benchmark_data.json",
+    "data/comprehensive_results_3.13.5-nogil/pybind11_flamegraph_1754689067.svg",
+    "data/comprehensive_results_3.13.5-nogil/pybind11_flamegraph_1754759961.svg",
+    "data/comprehensive_results_3.13.5-nogil/pybind11_profile_1754689067.perf.data",
+    "data/comprehensive_results_3.13.5-nogil/pybind11_profile_1754759961.perf.data",
+    "data/comprehensive_results_3.13.5-nogil/pyo3_flamegraph_1754689074.svg",
+    "data/comprehensive_results_3.13.5-nogil/pyo3_flamegraph_1754759967.svg",
+    "data/comprehensive_results_3.13.5-nogil/pyo3_profile_1754689074.perf.data",
+    "data/comprehensive_results_3.13.5-nogil/pyo3_profile_1754759967.perf.data",
+    "data/comprehensive_results_3.13.5-nogil/python_matrix_analysis.json",
+    "data/comprehensive_results_3.13.5-nogil/statistical_analysis_results.json",
+    "data/comprehensive_results_3.14.0-gil/cffi_flamegraph_1754689093.svg",
+    "data/comprehensive_results_3.14.0-gil/cffi_flamegraph_1754759983.svg",
+    "data/comprehensive_results_3.14.0-gil/cffi_profile_1754689093.perf.data",
+    "data/comprehensive_results_3.14.0-gil/cffi_profile_1754759983.perf.data",
+    "data/comprehensive_results_3.14.0-gil/comprehensive_report.txt",
+    "data/comprehensive_results_3.14.0-gil/comprehensive_results.json",
+    "data/comprehensive_results_3.14.0-gil/crossover_analysis_data.json",
+    "data/comprehensive_results_3.14.0-gil/ctypes_flamegraph_1754689087.svg",
+    "data/comprehensive_results_3.14.0-gil/ctypes_flamegraph_1754758915.svg",
+    "data/comprehensive_results_3.14.0-gil/ctypes_flamegraph_1754759978.svg",
+    "data/comprehensive_results_3.14.0-gil/ctypes_profile_1754689087.perf.data",
+    "data/comprehensive_results_3.14.0-gil/ctypes_profile_1754758915.perf.data",
+    "data/comprehensive_results_3.14.0-gil/ctypes_profile_1754759978.perf.data",
+    "data/comprehensive_results_3.14.0-gil/environment_validation.json",
+    "data/comprehensive_results_3.14.0-gil/hardware_counter_analysis.json",
+    "data/comprehensive_results_3.14.0-gil/plt_aware_benchmark_data.json",
+    "data/comprehensive_results_3.14.0-gil/pybind11_flamegraph_1754689100.svg",
+    "data/comprehensive_results_3.14.0-gil/pybind11_flamegraph_1754759989.svg",
+    "data/comprehensive_results_3.14.0-gil/pybind11_profile_1754689100.perf.data",
+    "data/comprehensive_results_3.14.0-gil/pybind11_profile_1754759989.perf.data",
+    "data/comprehensive_results_3.14.0-gil/pyo3_flamegraph_1754689106.svg",
+    "data/comprehensive_results_3.14.0-gil/pyo3_flamegraph_1754759994.svg",
+    "data/comprehensive_results_3.14.0-gil/pyo3_profile_1754689106.perf.data",
+    "data/comprehensive_results_3.14.0-gil/pyo3_profile_1754759994.perf.data",
+    "data/comprehensive_results_3.14.0-gil/python_matrix_analysis.json",
+    "data/comprehensive_results_3.14.0-gil/statistical_analysis_results.json",
+    "data/comprehensive_results_3.14.0-nogil/cffi_flamegraph_1754689126.svg",
+    "data/comprehensive_results_3.14.0-nogil/cffi_flamegraph_1754760009.svg",
+    "data/comprehensive_results_3.14.0-nogil/cffi_profile_1754689126.perf.data",
+    "data/comprehensive_results_3.14.0-nogil/cffi_profile_1754760009.perf.data",
+    "data/comprehensive_results_3.14.0-nogil/comprehensive_report.txt",
+    "data/comprehensive_results_3.14.0-nogil/comprehensive_results.json",
+    "data/comprehensive_results_3.14.0-nogil/crossover_analysis_data.json",
+    "data/comprehensive_results_3.14.0-nogil/ctypes_flamegraph_1754689120.svg",
+    "data/comprehensive_results_3.14.0-nogil/ctypes_flamegraph_1754758922.svg",
+    "data/comprehensive_results_3.14.0-nogil/ctypes_flamegraph_1754760004.svg",
+    "data/comprehensive_results_3.14.0-nogil/ctypes_profile_1754689120.perf.data",
+    "data/comprehensive_results_3.14.0-nogil/ctypes_profile_1754758922.perf.data",
+    "data/comprehensive_results_3.14.0-nogil/ctypes_profile_1754760004.perf.data",
+    "data/comprehensive_results_3.14.0-nogil/environment_validation.json",
+    "data/comprehensive_results_3.14.0-nogil/hardware_counter_analysis.json",
+    "data/comprehensive_results_3.14.0-nogil/plt_aware_benchmark_data.json",
+    "data/comprehensive_results_3.14.0-nogil/pybind11_flamegraph_1754689133.svg",
+    "data/comprehensive_results_3.14.0-nogil/pybind11_flamegraph_1754760015.svg",
+    "data/comprehensive_results_3.14.0-nogil/pybind11_profile_1754689133.perf.data",
+    "data/comprehensive_results_3.14.0-nogil/pybind11_profile_1754760015.perf.data",
+    "data/comprehensive_results_3.14.0-nogil/pyo3_flamegraph_1754689140.svg",
+    "data/comprehensive_results_3.14.0-nogil/pyo3_flamegraph_1754760020.svg",
+    "data/comprehensive_results_3.14.0-nogil/pyo3_profile_1754689140.perf.data",
+    "data/comprehensive_results_3.14.0-nogil/pyo3_profile_1754760020.perf.data",
+    "data/comprehensive_results_3.14.0-nogil/python_matrix_analysis.json",
+    "data/comprehensive_results_3.14.0-nogil/statistical_analysis_results.json",
+    "data/ctypes_cdll_vs_pydll/ctypes_cdll_vs_pydll_313_gil_latest.json",
+    "data/ctypes_cdll_vs_pydll/ctypes_cdll_vs_pydll_313_nogil_latest.json",
+    "data/ctypes_cdll_vs_pydll/ctypes_cdll_vs_pydll_314_gil_latest.json",
+    "data/ctypes_cdll_vs_pydll/ctypes_cdll_vs_pydll_314_nogil_latest.json",
+    "source/LICENSE",
+    "source/Makefile",
+    "source/tests/arena/rust/Cargo.toml",
+    "source/tests/arena/rust/arena_builder.py",
+    "source/tests/arena/rust/arena_cli.py",
+    "source/tests/arena/rust/arena_demo.py",
+    "source/tests/arena/rust/arena_manager.py",
+    "source/tests/arena/rust/arena_matrix_plotter.py",
+    "source/tests/arena/rust/arena_test.py",
+    "source/tests/arena/rust/arena_tester.py",
+    "source/tests/arena/rust/src/core.rs",
+    "source/tests/arena/rust/src/lib.rs",
+    "source/tests/arena/rust/src/main.rs",
+    "source/tests/benchmark-ffi/ENVIRONMENT_SETUP.md",
+    "source/tests/benchmark-ffi/ISOLATED_VENV_GUIDE.md",
+    "source/tests/benchmark-ffi/Makefile",
+    "source/tests/benchmark-ffi/__init__.py",
+    "source/tests/benchmark-ffi/benchmarks/__init__.py",
+    "source/tests/benchmark-ffi/debug_perf_parsing.py",
+    "source/tests/benchmark-ffi/docs/HOW_TO_USE_BENCHMARKS.md",
+    "source/tests/benchmark-ffi/docs/PROFILING_GUIDE.md",
+    "source/tests/benchmark-ffi/docs/PYTHON_MATRIX_BENCHMARKS.md",
+    "source/tests/benchmark-ffi/docs/PyO3_SETUP_INSTRUCTIONS.md",
+    "source/tests/benchmark-ffi/docs/RUN_HYPOTHESIS_VERIFICATION.md",
+    "source/tests/benchmark-ffi/docs/pyo3_compatibility_notes.md",
+    "source/tests/benchmark-ffi/docs/validation_report.txt",
+    "source/tests/benchmark-ffi/framework/README.md",
+    "source/tests/benchmark-ffi/framework/__init__.py",
+    "source/tests/benchmark-ffi/framework/crossover_analysis.py",
+    "source/tests/benchmark-ffi/framework/environment.py",
+    "source/tests/benchmark-ffi/framework/environment_control.py",
+    "source/tests/benchmark-ffi/framework/execution_methodology.py",
+    "source/tests/benchmark-ffi/framework/experimental_design.py",
+    "source/tests/benchmark-ffi/framework/function_verification.py",
+    "source/tests/benchmark-ffi/framework/hypothesis_verification.py",
+    "source/tests/benchmark-ffi/framework/profiling.py",
+    "source/tests/benchmark-ffi/framework/pyproject.toml",
+    "source/tests/benchmark-ffi/framework/python_matrix.py",
+    "source/tests/benchmark-ffi/framework/realtime_monitor.py",
+    "source/tests/benchmark-ffi/framework/runner.py",
+    "source/tests/benchmark-ffi/framework/src/framework/__init__.py",
+    "source/tests/benchmark-ffi/framework/statistics.py",
+    "source/tests/benchmark-ffi/framework/timer.py",
+    "source/tests/benchmark-ffi/framework/venv_integration.py",
+    "source/tests/benchmark-ffi/implementations/__init__.py",
+    "source/tests/benchmark-ffi/implementations/cffi_impl/__init__.py",
+    "source/tests/benchmark-ffi/implementations/cffi_impl/cffi_bench.py",
+    "source/tests/benchmark-ffi/implementations/ctypes_impl/__init__.py",
+    "source/tests/benchmark-ffi/implementations/ctypes_impl/ctypes_bench.py",
+    "source/tests/benchmark-ffi/implementations/pybind11_impl/__init__.py",
+    "source/tests/benchmark-ffi/implementations/pybind11_impl/pybind11_bench.py",
+    "source/tests/benchmark-ffi/implementations/pybind11_impl/pybind11_wrapper.cpp",
+    "source/tests/benchmark-ffi/implementations/pybind11_impl/setup_pybind11.py",
+    "source/tests/benchmark-ffi/implementations/pyo3_impl/Cargo.toml",
+    "source/tests/benchmark-ffi/implementations/pyo3_impl/__init__.py",
+    "source/tests/benchmark-ffi/implementations/pyo3_impl/benchlib_pyo3/__init__.py",
+    "source/tests/benchmark-ffi/implementations/pyo3_impl/build.rs",
+    "source/tests/benchmark-ffi/implementations/pyo3_impl/pyo3_bench.py",
+    "source/tests/benchmark-ffi/implementations/pyo3_impl/pyproject.toml",
+    "source/tests/benchmark-ffi/implementations/pyo3_impl/src/lib.rs",
+    "source/tests/benchmark-ffi/implementations/pyo3_impl/target/release/build/pyo3-build-config-2e914cd9ddfb3d25/out/pyo3-build-config-file.txt",
+    "source/tests/benchmark-ffi/implementations/pyo3_impl/target/release/build/pyo3-build-config-2e914cd9ddfb3d25/out/pyo3-build-config.txt",
+    "source/tests/benchmark-ffi/implementations/pyo3_impl/target/release/build/target-lexicon-95ce419fc69fc3e5/out/host.rs",
+    "source/tests/benchmark-ffi/lib/Makefile",
+    "source/tests/benchmark-ffi/lib/benchlib.c",
+    "source/tests/benchmark-ffi/requirements/requirements_3.13.5-gil.txt",
+    "source/tests/benchmark-ffi/requirements/requirements_3.13.5-nogil.txt",
+    "source/tests/benchmark-ffi/requirements/requirements_3.14.0rc1-gil.txt",
+    "source/tests/benchmark-ffi/requirements/requirements_3.14.0rc1-nogil.txt",
+    "source/tests/benchmark-ffi/run_phase1_demo.py",
+    "source/tests/benchmark-ffi/scripts/RECOVERY_GUIDE.md",
+    "source/tests/benchmark-ffi/scripts/analyze_freethreaded_performance.py",
+    "source/tests/benchmark-ffi/scripts/build_pybind11_all_venvs.py",
+    "source/tests/benchmark-ffi/scripts/build_pyo3_all_venvs.py",
+    "source/tests/benchmark-ffi/scripts/collect_perf_core_metrics.py",
+    "source/tests/benchmark-ffi/scripts/crossover_analysis.py",
+    "source/tests/benchmark-ffi/scripts/demo_all_ffi.py",
+    "source/tests/benchmark-ffi/scripts/dispatch_bench.py",
+    "source/tests/benchmark-ffi/scripts/generate_all_evidence.py",
+    "source/tests/benchmark-ffi/scripts/install_cffi_2.0.0b1.sh",
+    "source/tests/benchmark-ffi/scripts/lock_cpu_frequency.py",
+    "source/tests/benchmark-ffi/scripts/plt_aware_benchmark.py",
+    "source/tests/benchmark-ffi/scripts/recover_environment.py",
+    "source/tests/benchmark-ffi/scripts/results/cpu_frequency_backup.json",
+    "source/tests/benchmark-ffi/scripts/run_all_benchmarks.py",
+    "source/tests/benchmark-ffi/scripts/run_hardware_counter_analysis.py",
+    "source/tests/benchmark-ffi/scripts/run_matrix_benchmarks.py",
+    "source/tests/benchmark-ffi/scripts/run_statistical_analysis.py",
+    "source/tests/benchmark-ffi/scripts/run_with_all_venvs.py",
+    "source/tests/benchmark-ffi/scripts/run_with_venv.py",
+    "source/tests/benchmark-ffi/scripts/search_matrix_results.py",
+    "source/tests/benchmark-ffi/scripts/setup/arch/README.md",
+    "source/tests/benchmark-ffi/scripts/setup/arch/configure-isolation.sh",
+    "source/tests/benchmark-ffi/scripts/setup/arch/monitor-system.sh",
+    "source/tests/benchmark-ffi/scripts/setup/arch/setup-benchmarking.sh",
+    "source/tests/benchmark-ffi/scripts/setup/arch/test-setup.sh",
+    "source/tests/benchmark-ffi/scripts/setup/todo.md",
+    "source/tests/benchmark-ffi/scripts/setup_frequency_lock.sh",
+    "source/tests/benchmark-ffi/scripts/setup_isolated_venvs.py",
+    "source/tests/benchmark-ffi/scripts/setup_shared_venv.sh",
+    "source/tests/benchmark-ffi/scripts/test_profiling_modes.py",
+    "source/tests/benchmark-ffi/scripts/test_pyo3_fix.py",
+    "source/tests/benchmark-ffi/scripts/validate_environment.py",
+    "source/tests/benchmark-ffi/scripts/validation_rejection_demo.py",
+    "source/tests/benchmark-ffi/scripts/venv_config.yaml",
+    "source/tests/benchmark-ffi/scripts/viz_bench_from_json.py",
+    "source/tests/benchmark-ffi/test_crossover_analysis.py",
+    "source/tests/benchmark-ffi/validation.py",
+    "source/tests/benchmark-ffi-comprehensive/README.md",
+    "source/tests/benchmark-ffi-comprehensive/comprehensive_benchmark.py",
+    "source/tests/benchmark-ffi-comprehensive/followup.md",
+    "source/tests/benchmark-ffi-comprehensive/verify-h7-plan.md",
+    "source/tests/race/Makefile",
+    "source/tests/race/README.md",
+    "source/tests/race/demo_race_condition.py",
+    "source/tests/race/main.py",
+    "source/tests/race/pyproject.toml",
+    "source/tests/race/run_demo.sh",
+    "source/tests/race/test_environment_setup.py",
+    "source/tests/race/test_thread_library.py",
+    "source/tests/race/test_true_parallelism.py",
+    "source/tests/race/threadtest.cpp",
+    "source/tests/rust_ffi/Makefile",
+    "source/tests/rust_ffi/__init__.py",
+    "source/tests/rust_ffi/analyze_first_call_overhead.py",
+    "source/tests/rust_ffi/debug_crash.py",
+    "source/tests/rust_ffi/debug_stacktrace.py",
+    "source/tests/rust_ffi/framework.py",
+    "source/tests/rust_ffi/handcrafted_ffi/Cargo.toml",
+    "source/tests/rust_ffi/handcrafted_ffi/build.rs",
+    "source/tests/rust_ffi/handcrafted_ffi/src/async_support.rs",
+    "source/tests/rust_ffi/handcrafted_ffi/src/error_handling.rs",
+    "source/tests/rust_ffi/handcrafted_ffi/src/lib.rs",
+    "source/tests/rust_ffi/handcrafted_ffi/src/python_types.rs",
+    "source/tests/rust_ffi/pyo3_investigation/Cargo.toml",
+    "source/tests/rust_ffi/pyo3_investigation/pyo3_investigation/__init__.py",
+    "source/tests/rust_ffi/pyo3_investigation/pyo3_loader.py",
+    "source/tests/rust_ffi/pyo3_investigation/setup.py",
+    "source/tests/rust_ffi/pyo3_investigation/src/bug_4627.rs",
+    "source/tests/rust_ffi/pyo3_investigation/src/bug_4882.rs",
+    "source/tests/rust_ffi/pyo3_investigation/src/lib.rs",
+    "source/tests/rust_ffi/pyo3_investigation/src/performance.rs",
+    "source/tests/rust_ffi/run_gil_tests.py",
+    "source/tests/rust_ffi/test_build_handcrafted_ffi.py",
+    "source/tests/rust_ffi/test_handcrafted_impl.py",
+    "source/tests/rust_ffi/test_hypothesis_verification.py",
+    "source/tests/rust_ffi/test_pyo3_reproduction.py",
+    "source/tests/rust_ffi/writeup.md"
   ],
   "tree": {
     "dirs": {
       "data": {
         "dirs": {
-          "results": {
-            "dirs": {
-              "2025": {
-                "dirs": {
-                  "january": {
-                    "files": [
-                      "performance_metrics.csv"
-                    ]
-                  }
-                }
-              }
-            }
+          "Py03-gil-nogil-diff-flamegraph": {
+            "files": [
+              "pyo3_diff_flame.svg",
+              "pyo3_gil_flame.svg",
+              "pyo3_nogil_flame.svg"
+            ]
+          },
+          "comprehensive_results_3.13.5-gil": {
+            "files": [
+              "a.json",
+              "cffi_flamegraph_1754689027.svg",
+              "cffi_flamegraph_1754759929.svg",
+              "cffi_profile_1754689027.perf.data",
+              "cffi_profile_1754759929.perf.data",
+              "comprehensive_report.txt",
+              "comprehensive_results.json",
+              "crossover_analysis_data.json",
+              "ctypes_flamegraph_1754689020.svg",
+              "ctypes_flamegraph_1754758902.svg",
+              "ctypes_flamegraph_1754759923.svg",
+              "ctypes_profile_1754689020.perf.data",
+              "ctypes_profile_1754758902.perf.data",
+              "ctypes_profile_1754759923.perf.data",
+              "environment_validation.json",
+              "hardware_counter_analysis.json",
+              "plt_aware_benchmark_data.json",
+              "pybind11_flamegraph_1754689033.svg",
+              "pybind11_flamegraph_1754759934.svg",
+              "pybind11_profile_1754689033.perf.data",
+              "pybind11_profile_1754759934.perf.data",
+              "pyo3_flamegraph_1754689040.svg",
+              "pyo3_flamegraph_1754759939.svg",
+              "pyo3_profile_1754689040.perf.data",
+              "pyo3_profile_1754759939.perf.data",
+              "python_matrix_analysis.json",
+              "statistical_analysis_results.json"
+            ]
+          },
+          "comprehensive_results_3.13.5-nogil": {
+            "files": [
+              "cffi_flamegraph_1754689060.svg",
+              "cffi_flamegraph_1754759956.svg",
+              "cffi_profile_1754689060.perf.data",
+              "cffi_profile_1754759956.perf.data",
+              "comprehensive_report.txt",
+              "comprehensive_results.json",
+              "crossover_analysis_data.json",
+              "ctypes_flamegraph_1754689053.svg",
+              "ctypes_flamegraph_1754758909.svg",
+              "ctypes_flamegraph_1754759950.svg",
+              "ctypes_profile_1754689053.perf.data",
+              "ctypes_profile_1754758909.perf.data",
+              "ctypes_profile_1754759950.perf.data",
+              "environment_validation.json",
+              "hardware_counter_analysis.json",
+              "plt_aware_benchmark_data.json",
+              "pybind11_flamegraph_1754689067.svg",
+              "pybind11_flamegraph_1754759961.svg",
+              "pybind11_profile_1754689067.perf.data",
+              "pybind11_profile_1754759961.perf.data",
+              "pyo3_flamegraph_1754689074.svg",
+              "pyo3_flamegraph_1754759967.svg",
+              "pyo3_profile_1754689074.perf.data",
+              "pyo3_profile_1754759967.perf.data",
+              "python_matrix_analysis.json",
+              "statistical_analysis_results.json"
+            ]
+          },
+          "comprehensive_results_3.14.0-gil": {
+            "files": [
+              "cffi_flamegraph_1754689093.svg",
+              "cffi_flamegraph_1754759983.svg",
+              "cffi_profile_1754689093.perf.data",
+              "cffi_profile_1754759983.perf.data",
+              "comprehensive_report.txt",
+              "comprehensive_results.json",
+              "crossover_analysis_data.json",
+              "ctypes_flamegraph_1754689087.svg",
+              "ctypes_flamegraph_1754758915.svg",
+              "ctypes_flamegraph_1754759978.svg",
+              "ctypes_profile_1754689087.perf.data",
+              "ctypes_profile_1754758915.perf.data",
+              "ctypes_profile_1754759978.perf.data",
+              "environment_validation.json",
+              "hardware_counter_analysis.json",
+              "plt_aware_benchmark_data.json",
+              "pybind11_flamegraph_1754689100.svg",
+              "pybind11_flamegraph_1754759989.svg",
+              "pybind11_profile_1754689100.perf.data",
+              "pybind11_profile_1754759989.perf.data",
+              "pyo3_flamegraph_1754689106.svg",
+              "pyo3_flamegraph_1754759994.svg",
+              "pyo3_profile_1754689106.perf.data",
+              "pyo3_profile_1754759994.perf.data",
+              "python_matrix_analysis.json",
+              "statistical_analysis_results.json"
+            ]
+          },
+          "comprehensive_results_3.14.0-nogil": {
+            "files": [
+              "cffi_flamegraph_1754689126.svg",
+              "cffi_flamegraph_1754760009.svg",
+              "cffi_profile_1754689126.perf.data",
+              "cffi_profile_1754760009.perf.data",
+              "comprehensive_report.txt",
+              "comprehensive_results.json",
+              "crossover_analysis_data.json",
+              "ctypes_flamegraph_1754689120.svg",
+              "ctypes_flamegraph_1754758922.svg",
+              "ctypes_flamegraph_1754760004.svg",
+              "ctypes_profile_1754689120.perf.data",
+              "ctypes_profile_1754758922.perf.data",
+              "ctypes_profile_1754760004.perf.data",
+              "environment_validation.json",
+              "hardware_counter_analysis.json",
+              "plt_aware_benchmark_data.json",
+              "pybind11_flamegraph_1754689133.svg",
+              "pybind11_flamegraph_1754760015.svg",
+              "pybind11_profile_1754689133.perf.data",
+              "pybind11_profile_1754760015.perf.data",
+              "pyo3_flamegraph_1754689140.svg",
+              "pyo3_flamegraph_1754760020.svg",
+              "pyo3_profile_1754689140.perf.data",
+              "pyo3_profile_1754760020.perf.data",
+              "python_matrix_analysis.json",
+              "statistical_analysis_results.json"
+            ]
+          },
+          "ctypes_cdll_vs_pydll": {
+            "files": [
+              "ctypes_cdll_vs_pydll_313_gil_latest.json",
+              "ctypes_cdll_vs_pydll_313_nogil_latest.json",
+              "ctypes_cdll_vs_pydll_314_gil_latest.json",
+              "ctypes_cdll_vs_pydll_314_nogil_latest.json"
+            ]
           }
         }
       },
       "source": {
+        "files": [
+          "LICENSE",
+          "Makefile"
+        ],
         "dirs": {
-          "benchmarks": {
+          "tests": {
             "dirs": {
-              "cpu": {
+              "arena": {
+                "dirs": {
+                  "rust": {
+                    "files": [
+                      "Cargo.toml",
+                      "arena_builder.py",
+                      "arena_cli.py",
+                      "arena_demo.py",
+                      "arena_manager.py",
+                      "arena_matrix_plotter.py",
+                      "arena_test.py",
+                      "arena_tester.py"
+                    ],
+                    "dirs": {
+                      "src": {
+                        "files": [
+                          "core.rs",
+                          "lib.rs",
+                          "main.rs"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "benchmark-ffi": {
                 "files": [
-                  "test_performance.py"
+                  "ENVIRONMENT_SETUP.md",
+                  "ISOLATED_VENV_GUIDE.md",
+                  "Makefile",
+                  "__init__.py",
+                  "debug_perf_parsing.py",
+                  "run_phase1_demo.py",
+                  "test_crossover_analysis.py",
+                  "validation.py"
+                ],
+                "dirs": {
+                  "benchmarks": {
+                    "files": [
+                      "__init__.py"
+                    ]
+                  },
+                  "docs": {
+                    "files": [
+                      "HOW_TO_USE_BENCHMARKS.md",
+                      "PROFILING_GUIDE.md",
+                      "PYTHON_MATRIX_BENCHMARKS.md",
+                      "PyO3_SETUP_INSTRUCTIONS.md",
+                      "RUN_HYPOTHESIS_VERIFICATION.md",
+                      "pyo3_compatibility_notes.md",
+                      "validation_report.txt"
+                    ]
+                  },
+                  "framework": {
+                    "files": [
+                      "README.md",
+                      "__init__.py",
+                      "crossover_analysis.py",
+                      "environment.py",
+                      "environment_control.py",
+                      "execution_methodology.py",
+                      "experimental_design.py",
+                      "function_verification.py",
+                      "hypothesis_verification.py",
+                      "profiling.py",
+                      "pyproject.toml",
+                      "python_matrix.py",
+                      "realtime_monitor.py",
+                      "runner.py",
+                      "statistics.py",
+                      "timer.py",
+                      "venv_integration.py"
+                    ],
+                    "dirs": {
+                      "src": {
+                        "dirs": {
+                          "framework": {
+                            "files": [
+                              "__init__.py"
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "implementations": {
+                    "files": [
+                      "__init__.py"
+                    ],
+                    "dirs": {
+                      "cffi_impl": {
+                        "files": [
+                          "__init__.py",
+                          "cffi_bench.py"
+                        ]
+                      },
+                      "ctypes_impl": {
+                        "files": [
+                          "__init__.py",
+                          "ctypes_bench.py"
+                        ]
+                      },
+                      "pybind11_impl": {
+                        "files": [
+                          "__init__.py",
+                          "pybind11_bench.py",
+                          "pybind11_wrapper.cpp",
+                          "setup_pybind11.py"
+                        ]
+                      },
+                      "pyo3_impl": {
+                        "files": [
+                          "Cargo.toml",
+                          "__init__.py",
+                          "build.rs",
+                          "pyo3_bench.py",
+                          "pyproject.toml"
+                        ],
+                        "dirs": {
+                          "benchlib_pyo3": {
+                            "files": [
+                              "__init__.py"
+                            ]
+                          },
+                          "src": {
+                            "files": [
+                              "lib.rs"
+                            ]
+                          },
+                          "target": {
+                            "dirs": {
+                              "release": {
+                                "dirs": {
+                                  "build": {
+                                    "dirs": {
+                                      "pyo3-build-config-2e914cd9ddfb3d25": {
+                                        "dirs": {
+                                          "out": {
+                                            "files": [
+                                              "pyo3-build-config-file.txt",
+                                              "pyo3-build-config.txt"
+                                            ]
+                                          }
+                                        }
+                                      },
+                                      "target-lexicon-95ce419fc69fc3e5": {
+                                        "dirs": {
+                                          "out": {
+                                            "files": [
+                                              "host.rs"
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "lib": {
+                    "files": [
+                      "Makefile",
+                      "benchlib.c"
+                    ]
+                  },
+                  "requirements": {
+                    "files": [
+                      "requirements_3.13.5-gil.txt",
+                      "requirements_3.13.5-nogil.txt",
+                      "requirements_3.14.0rc1-gil.txt",
+                      "requirements_3.14.0rc1-nogil.txt"
+                    ]
+                  },
+                  "scripts": {
+                    "files": [
+                      "RECOVERY_GUIDE.md",
+                      "analyze_freethreaded_performance.py",
+                      "build_pybind11_all_venvs.py",
+                      "build_pyo3_all_venvs.py",
+                      "collect_perf_core_metrics.py",
+                      "crossover_analysis.py",
+                      "demo_all_ffi.py",
+                      "dispatch_bench.py",
+                      "generate_all_evidence.py",
+                      "install_cffi_2.0.0b1.sh",
+                      "lock_cpu_frequency.py",
+                      "plt_aware_benchmark.py",
+                      "recover_environment.py",
+                      "run_all_benchmarks.py",
+                      "run_hardware_counter_analysis.py",
+                      "run_matrix_benchmarks.py",
+                      "run_statistical_analysis.py",
+                      "run_with_all_venvs.py",
+                      "run_with_venv.py",
+                      "search_matrix_results.py",
+                      "setup_frequency_lock.sh",
+                      "setup_isolated_venvs.py",
+                      "setup_shared_venv.sh",
+                      "test_profiling_modes.py",
+                      "test_pyo3_fix.py",
+                      "validate_environment.py",
+                      "validation_rejection_demo.py",
+                      "venv_config.yaml",
+                      "viz_bench_from_json.py"
+                    ],
+                    "dirs": {
+                      "results": {
+                        "files": [
+                          "cpu_frequency_backup.json"
+                        ]
+                      },
+                      "setup": {
+                        "dirs": {
+                          "arch": {
+                            "files": [
+                              "README.md",
+                              "configure-isolation.sh",
+                              "monitor-system.sh",
+                              "setup-benchmarking.sh",
+                              "test-setup.sh"
+                            ]
+                          }
+                        },
+                        "files": [
+                          "todo.md"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "benchmark-ffi-comprehensive": {
+                "files": [
+                  "README.md",
+                  "comprehensive_benchmark.py",
+                  "followup.md",
+                  "verify-h7-plan.md"
                 ]
+              },
+              "race": {
+                "files": [
+                  "Makefile",
+                  "README.md",
+                  "demo_race_condition.py",
+                  "main.py",
+                  "pyproject.toml",
+                  "run_demo.sh",
+                  "test_environment_setup.py",
+                  "test_thread_library.py",
+                  "test_true_parallelism.py",
+                  "threadtest.cpp"
+                ]
+              },
+              "rust_ffi": {
+                "files": [
+                  "Makefile",
+                  "__init__.py",
+                  "analyze_first_call_overhead.py",
+                  "debug_crash.py",
+                  "debug_stacktrace.py",
+                  "framework.py",
+                  "run_gil_tests.py",
+                  "test_build_handcrafted_ffi.py",
+                  "test_handcrafted_impl.py",
+                  "test_hypothesis_verification.py",
+                  "test_pyo3_reproduction.py",
+                  "writeup.md"
+                ],
+                "dirs": {
+                  "handcrafted_ffi": {
+                    "files": [
+                      "Cargo.toml",
+                      "build.rs"
+                    ],
+                    "dirs": {
+                      "src": {
+                        "files": [
+                          "async_support.rs",
+                          "error_handling.rs",
+                          "lib.rs",
+                          "python_types.rs"
+                        ]
+                      }
+                    }
+                  },
+                  "pyo3_investigation": {
+                    "files": [
+                      "Cargo.toml",
+                      "pyo3_loader.py",
+                      "setup.py"
+                    ],
+                    "dirs": {
+                      "pyo3_investigation": {
+                        "files": [
+                          "__init__.py"
+                        ]
+                      },
+                      "src": {
+                        "files": [
+                          "bug_4627.rs",
+                          "bug_4882.rs",
+                          "lib.rs",
+                          "performance.rs"
+                        ]
+                      }
+                    }
+                  }
+                }
               }
             }
           }

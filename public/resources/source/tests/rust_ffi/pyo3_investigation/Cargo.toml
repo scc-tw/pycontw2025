@@ -1,0 +1,32 @@
+# pyo3_investigation/Cargo.toml
+# PyO3 bug reproduction and investigation project
+[package]
+name = "pyo3_investigation"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "pyo3_investigation"
+crate-type = ["cdylib"]
+
+# Build configuration for Python extension
+[target.x86_64-apple-darwin]
+rustflags = ["-C", "link-arg=-undefined", "-C", "link-arg=dynamic_lookup"]
+
+[target.aarch64-apple-darwin]
+rustflags = ["-C", "link-arg=-undefined", "-C", "link-arg=dynamic_lookup"]
+
+[dependencies]
+pyo3 = { version = "0.22", features = ["auto-initialize"] }
+
+[dependencies.tokio]
+version = "1.0"
+features = ["full"]
+optional = true
+
+[features]
+default = ["pyo3/auto-initialize"]
+async_support = ["tokio"]
+
+[build-dependencies]
+pyo3-build-config = "0.22"
