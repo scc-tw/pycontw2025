@@ -179,14 +179,17 @@ export class FileService implements IFileService {
       
       parts.forEach((part, index) => {
         currentPath = `${currentPath}/${part}`
-        const isFile = index === parts.length - 1 && part.includes('.')
+        const isLastPart = index === parts.length - 1
+        const isSpecialFile = this.isSpecialFile(part)
+        const hasExtension = part.includes('.')
+        const isFile = isLastPart && (hasExtension || isSpecialFile)
         
         if (!root.has(currentPath)) {
           const node: FileNode = {
             name: part,
             path: currentPath,
             type: isFile ? 'file' : 'directory',
-            extension: isFile ? part.split('.').pop() : undefined,
+            extension: hasExtension ? part.split('.').pop() : undefined,
             language: isFile ? this.detectLanguage(part) : undefined
           }
           
@@ -206,6 +209,23 @@ export class FileService implements IFileService {
     })
     
     return tree
+  }
+
+  /**
+   * Check if a filename is a special file without extension
+   */
+  private isSpecialFile(filename: string): boolean {
+    const specialFiles = [
+      'Makefile', 'makefile', 'MAKEFILE',
+      'GNUmakefile', 'gnumakefile',
+      'LICENSE', 'license', 'License',
+      'README', 'readme', 'Readme',
+      'Dockerfile', 'dockerfile',
+      'Cargo.lock', 'Cargo.toml',
+      'pyproject.toml', 'setup.cfg',
+      'requirements.txt', 'requirements.in'
+    ]
+    return specialFiles.includes(filename)
   }
 
   /**
@@ -279,9 +299,19 @@ export class FileService implements IFileService {
       'less': 'less'
     }
     
-    // Special case for Makefile
-    if (filename.toLowerCase() === 'makefile') {
+    // Special cases for files without extensions
+    const lowerFilename = filename.toLowerCase()
+    if (lowerFilename === 'makefile' || lowerFilename === 'gnumakefile') {
       return 'makefile'
+    }
+    if (lowerFilename === 'license' || lowerFilename === 'licence') {
+      return 'text'
+    }
+    if (lowerFilename === 'readme') {
+      return 'markdown'
+    }
+    if (lowerFilename === 'dockerfile') {
+      return 'dockerfile'
     }
     
     return languageMap[ext || ''] || 'text'

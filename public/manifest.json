@@ -1,7 +1,7 @@
 {
-  "generated": "2025-08-18T08:42:40.266Z",
+  "generated": "2025-08-18T08:47:56.333Z",
   "basePath": "/resources",
-  "totalFiles": 255,
+  "totalFiles": 256,
   "files": [
     "data/Py03-gil-nogil-diff-flamegraph/pyo3_diff_flame.svg",
     "data/Py03-gil-nogil-diff-flamegraph/pyo3_gil_flame.svg",
@@ -114,6 +114,7 @@
     "data/ctypes_cdll_vs_pydll/ctypes_cdll_vs_pydll_313_nogil_latest.json",
     "data/ctypes_cdll_vs_pydll/ctypes_cdll_vs_pydll_314_gil_latest.json",
     "data/ctypes_cdll_vs_pydll/ctypes_cdll_vs_pydll_314_nogil_latest.json",
+    "source/GNUmakefile",
     "source/LICENSE",
     "source/Makefile",
     "source/tests/arena/rust/Cargo.toml",
@@ -402,6 +403,7 @@
       },
       "source": {
         "files": [
+          "GNUmakefile",
           "LICENSE",
           "Makefile"
         ],

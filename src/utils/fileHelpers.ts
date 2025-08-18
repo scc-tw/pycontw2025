@@ -130,9 +130,19 @@ export const detectLanguage = (filename: string): string => {
     'less': 'less'
   }
   
-  // Special case for Makefile
-  if (filename.toLowerCase() === 'makefile') {
+  // Special cases for files without extensions
+  const lowerFilename = filename.toLowerCase()
+  if (lowerFilename === 'makefile' || lowerFilename === 'gnumakefile') {
     return 'makefile'
+  }
+  if (lowerFilename === 'license' || lowerFilename === 'licence') {
+    return 'text'
+  }
+  if (lowerFilename === 'readme') {
+    return 'markdown'
+  }
+  if (lowerFilename === 'dockerfile') {
+    return 'dockerfile'
   }
   
   return languageMap[ext || ''] || 'text'

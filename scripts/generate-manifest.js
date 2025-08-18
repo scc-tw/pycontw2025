@@ -32,7 +32,7 @@ const ALLOWED_EXTENSIONS = [
 ]
 
 // Special files to include (without extension)
-const SPECIAL_FILES = ['Makefile', 'makefile', 'MAKEFILE', 'Dockerfile', 'LICENSE', 'README']
+const SPECIAL_FILES = ['Makefile', 'makefile', 'MAKEFILE', 'GNUmakefile', 'Dockerfile', 'LICENSE', 'README']
 
 /**
  * Check if a file should be included in the manifest
