@@ -49,6 +49,8 @@ jobs:
           cp public/manifest.json dist/
           cp public/CNAME dist/
           cp -r public/resources dist/
+          # Add .nojekyll to prevent Jekyll processing
+          touch dist/.nojekyll
           
       - name: Setup Pages
         uses: actions/configure-pages@v4

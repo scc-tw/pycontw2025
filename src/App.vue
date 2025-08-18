@@ -22,8 +22,8 @@
     <router-view />
     
     <footer class="app-footer">
-      <div class="container mx-auto px-4 py-6 text-center text-sm text-gray-600">
-        <p>© 2025 scc @ CyCraft | PyCon Taiwan 2025 Talk Resources</p>
+      <div class="container mx-auto px-4 py-8 text-center">
+        <p class="text-label text-theme-muted">© 2025 scc @ CyCraft | PyCon Taiwan 2025 Talk Resources</p>
         <p class="mt-2">
           <a href="https://github.com/scc-tw/pycontw2025" target="_blank" class="footer-link">
             GitHub
@@ -46,30 +46,30 @@
 @import './assets/main.css';
 
 .app-navbar {
-  @apply bg-pycon-blue text-white shadow-lg sticky top-0 z-50;
+  @apply bg-theme-surface text-theme-ink border-b-2 border-theme-border sticky top-0 z-50 shadow-card;
 }
 
 .brand {
-  @apply text-xl font-bold hover:text-pycon-gold transition-colors;
+  @apply text-title font-semibold hover:text-theme-accent transition-colors duration-[180ms];
 }
 
 .nav-links {
-  @apply flex space-x-6;
+  @apply flex items-center gap-gap-lg;
 }
 
 .nav-link {
-  @apply hover:text-pycon-gold transition-colors;
+  @apply text-body hover:text-theme-accent transition-all duration-[180ms] px-3 py-2 rounded-md hover:bg-theme-ui;
 }
 
 .nav-link.router-link-active {
-  @apply text-pycon-gold font-semibold;
+  @apply text-theme-accent font-semibold bg-theme-ui;
 }
 
 .app-footer {
-  @apply bg-gray-100 border-t border-gray-200 mt-auto;
+  @apply bg-gradient-to-t from-theme-ui to-theme-bg border-t border-theme-border mt-auto;
 }
 
 .footer-link {
-  @apply text-pycon-blue hover:underline;
+  @apply text-theme-accent hover:underline transition-all duration-[180ms] font-semibold;
 }
 </style>
