@@ -95,7 +95,7 @@ const selectFile = async (file: FileNode) => {
     try {
       // For data files, we might need different handling
       const ext = file.extension?.toLowerCase()
-      if (ext && ['json', 'csv', 'tsv', 'txt', 'md', 'yaml', 'yml'].includes(ext)) {
+      if (ext && ['json', 'csv', 'tsv', 'txt', 'md', 'yaml', 'yml', 'svg'].includes(ext)) {
         fileContent.value = await fileService.fetchFileContent(file.path)
       }
     } catch (e) {

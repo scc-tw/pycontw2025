@@ -30,7 +30,17 @@
 
     <!-- SVG Viewer -->
     <div v-else-if="isSvg" class="svg-viewer">
-      <div v-html="content" class="svg-container"></div>
+      <div class="svg-controls">
+        <button @click="openFullPage" class="btn-fullpage" title="Open in full page">
+          <span class="icon">⤢</span> View Full Page
+        </button>
+      </div>
+      <div v-if="content" v-html="content" class="svg-container"></div>
+      <div v-else class="svg-container">
+        <object :data="fileUrl" type="image/svg+xml" class="svg-object">
+          <img :src="fileUrl" :alt="fileName" class="svg-fallback" />
+        </object>
+      </div>
     </div>
 
     <!-- Performance Data Viewer -->
@@ -183,6 +193,13 @@ watch(() => props.content, (newContent) => {
   }
 }, { immediate: true })
 
+// Open SVG in full page
+const openFullPage = () => {
+  if (props.fileUrl) {
+    window.open(props.fileUrl, '_blank')
+  }
+}
+
 // Download functionality
 const downloadFile = () => {
   if (!props.fileUrl) return
@@ -244,6 +261,22 @@ const downloadFile = () => {
 }
 
 /* SVG Viewer */
+.svg-viewer {
+  @apply relative;
+}
+
+.svg-controls {
+  @apply flex justify-end p-2 border-b border-gray-200;
+}
+
+.btn-fullpage {
+  @apply inline-flex items-center px-3 py-1.5 text-sm bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors;
+}
+
+.btn-fullpage .icon {
+  @apply mr-1 text-lg;
+}
+
 .svg-container {
   @apply flex justify-center items-center p-4;
   max-height: 600px;
@@ -251,6 +284,15 @@ const downloadFile = () => {
 }
 
 .svg-container :deep(svg) {
+  @apply max-w-full h-auto;
+}
+
+.svg-object {
+  @apply max-w-full h-auto;
+  max-height: 580px;
+}
+
+.svg-fallback {
   @apply max-w-full h-auto;
 }
 

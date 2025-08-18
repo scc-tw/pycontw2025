@@ -47,7 +47,17 @@
         <img :src="imageUrl" :alt="file.name" class="max-w-full h-auto" />
       </div>
       
-      <div v-else-if="isSvg" class="svg-viewer" v-html="content"></div>
+      <div v-else-if="isSvg" class="svg-viewer">
+        <div class="svg-controls">
+          <button @click="openFullPage" class="btn-fullpage" title="Open in full page">
+            <span class="icon">⤢</span> View Full Page
+          </button>
+        </div>
+        <div v-if="content" v-html="content"></div>
+        <object v-else :data="imageUrl" type="image/svg+xml" class="svg-object">
+          <img :src="imageUrl" :alt="file.name" class="svg-fallback" />
+        </object>
+      </div>
       
       <pre v-else class="code-content"><code>{{ content || 'Empty file' }}</code></pre>
     </div>
@@ -91,6 +101,12 @@ const isSvg = computed(() => {
 const imageUrl = computed(() => {
   return props.file ? fileService.getDownloadUrl(props.file.path) : ''
 })
+
+const openFullPage = () => {
+  if (imageUrl.value) {
+    window.open(imageUrl.value, '_blank')
+  }
+}
 
 watch(() => props.file, async (newFile) => {
   // Only fetch content if not provided via props
@@ -180,10 +196,30 @@ const downloadFile = () => {
 }
 
 .svg-viewer {
-  @apply p-4;
+  @apply relative;
+}
+
+.svg-controls {
+  @apply flex justify-end p-2 border-b border-gray-200;
+}
+
+.btn-fullpage {
+  @apply inline-flex items-center px-3 py-1.5 text-sm bg-white border border-gray-300 rounded hover:bg-gray-50 transition-colors;
+}
+
+.btn-fullpage .icon {
+  @apply mr-1 text-lg;
 }
 
 .svg-viewer :deep(svg) {
+  @apply max-w-full h-auto p-4;
+}
+
+.svg-object {
+  @apply max-w-full h-auto;
+}
+
+.svg-fallback {
   @apply max-w-full h-auto;
 }
 </style>

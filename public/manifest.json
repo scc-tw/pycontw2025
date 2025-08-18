@@ -1,12 +1,11 @@
 {
-  "generated": "2025-08-18T08:27:42.284Z",
+  "generated": "2025-08-18T08:42:40.266Z",
   "basePath": "/resources",
-  "totalFiles": 260,
+  "totalFiles": 255,
   "files": [
     "data/Py03-gil-nogil-diff-flamegraph/pyo3_diff_flame.svg",
     "data/Py03-gil-nogil-diff-flamegraph/pyo3_gil_flame.svg",
     "data/Py03-gil-nogil-diff-flamegraph/pyo3_nogil_flame.svg",
-    "data/comprehensive_results_3.13.5-gil/a.json",
     "data/comprehensive_results_3.13.5-gil/cffi_flamegraph_1754689027.svg",
     "data/comprehensive_results_3.13.5-gil/cffi_flamegraph_1754759929.svg",
     "data/comprehensive_results_3.13.5-gil/cffi_profile_1754689027.perf.data",
@@ -211,7 +210,6 @@
     "source/tests/benchmark-ffi/scripts/setup/arch/monitor-system.sh",
     "source/tests/benchmark-ffi/scripts/setup/arch/setup-benchmarking.sh",
     "source/tests/benchmark-ffi/scripts/setup/arch/test-setup.sh",
-    "source/tests/benchmark-ffi/scripts/setup/todo.md",
     "source/tests/benchmark-ffi/scripts/setup_frequency_lock.sh",
     "source/tests/benchmark-ffi/scripts/setup_isolated_venvs.py",
     "source/tests/benchmark-ffi/scripts/setup_shared_venv.sh",
@@ -223,10 +221,7 @@
     "source/tests/benchmark-ffi/scripts/viz_bench_from_json.py",
     "source/tests/benchmark-ffi/test_crossover_analysis.py",
     "source/tests/benchmark-ffi/validation.py",
-    "source/tests/benchmark-ffi-comprehensive/README.md",
     "source/tests/benchmark-ffi-comprehensive/comprehensive_benchmark.py",
-    "source/tests/benchmark-ffi-comprehensive/followup.md",
-    "source/tests/benchmark-ffi-comprehensive/verify-h7-plan.md",
     "source/tests/race/Makefile",
     "source/tests/race/README.md",
     "source/tests/race/demo_race_condition.py",
@@ -277,7 +272,6 @@
           },
           "comprehensive_results_3.13.5-gil": {
             "files": [
-              "a.json",
               "cffi_flamegraph_1754689027.svg",
               "cffi_flamegraph_1754759929.svg",
               "cffi_profile_1754689027.perf.data",
@@ -641,10 +635,7 @@
                               "test-setup.sh"
                             ]
                           }
-                        },
-                        "files": [
-                          "todo.md"
-                        ]
+                        }
                       }
                     }
                   }
@@ -652,10 +643,7 @@
               },
               "benchmark-ffi-comprehensive": {
                 "files": [
-                  "README.md",
-                  "comprehensive_benchmark.py",
-                  "followup.md",
-                  "verify-h7-plan.md"
+                  "comprehensive_benchmark.py"
                 ]
               },
               "race": {
